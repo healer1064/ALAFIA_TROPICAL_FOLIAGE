@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Directory from '../../components/Directory'
 
 const StyledSection = styled.section`
-    height: 100%;
+    height: calc(100% - 6.5rem);
 `
 
 function Homepage (props){

@@ -1,20 +1,32 @@
 import React from 'react'
-import { Global } from './styles/global'
-
+import { Route, Switch } from 'react-router-dom'
 import "fontsource-open-sans"
-import Header from './components/Header'
+
+//Layouts 
+import MainLayout from './Layouts/Mainlayout'
+
+//Pages
 import Homepage from './pages/Homepage'
+import Registration from './pages/Registration'
+
 
 function App() {
   return (
     <div className="App">
-      <Global />
-      <Header />
-      <div className="main">
-        <Homepage />
-      </div>
+      <Switch>
+          <Route exact path="/" render={() => (
+            <MainLayout>
+              <Homepage />
+            </MainLayout>
+          )} />
+          <Route exact path="/registration" render={() => (
+            <MainLayout>
+              <Registration />
+            </MainLayout>
+          )} />
+      </Switch>
     </div>
-  );
+  )
 }
 
 export default App;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
@@ -18,6 +19,32 @@ const StyledHeader = styled.header`
             left: 10px;
             transform: translateY(-50%);
         }
+
+        .callToActions {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            ul,li {
+                margin: 0;
+                padding: 0;
+
+            }
+
+            li {
+                list-style-type: none;
+
+                a {
+                    font-size: 1.8rem;
+                    line-height: 1;
+                    color: black;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
     }
 `
 
@@ -25,9 +52,18 @@ function Header(props){
     return(
         <StyledHeader>
             <div className="wrap">
-                <div className="logo">
-                    Levins
-                    {/* <img /> */}
+                <Link to='/'>
+                    <div className="logo">
+                        Levins
+                        {/* <img /> */}
+                    </div>
+                </Link>
+                <div className="callToActions">
+                    <ul>
+                        <li>
+                            <Link to="/registration">Register</Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </StyledHeader>

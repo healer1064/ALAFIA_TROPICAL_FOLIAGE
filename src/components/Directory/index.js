@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
         .item {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 86vh;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
