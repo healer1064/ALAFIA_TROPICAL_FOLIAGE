@@ -5090,6 +5090,11 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
   integrity sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA==
 
+fontsource-open-sans@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fontsource-open-sans/-/fontsource-open-sans-4.0.0.tgz#f5884fe491b86e522e6ce10dbddaebd5d152fa95"
+  integrity sha512-WWiMhDr/rgDPnw1tKjcqPpjRDJDrDnNVLpfscr7wwbpK33q3zcVnkhBOUcaZZlw3y1iRc+pj/ciPzLWExKT3zw==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
