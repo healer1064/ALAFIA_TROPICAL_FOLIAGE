@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { signInWithGoogle } from './../../firebase/utils'
 
+//FORM COMPONENTS
+import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 const StyledDiv = styled.div`
@@ -23,42 +25,84 @@ const StyledDiv = styled.div`
             width: 100%;
             text-align: center;
             padding: 0;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
         }
 
         .socialSignIn {
-            margin: 2rem auto;
+            margin: .5rem auto 0;
         }
 
     }
 `
 
-function SignIn(props){
+const initialState = {
+    email: '',
+    password: '',
+}
 
-    const handleSubmit = e => {
+class SignIn extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            ...initialState
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleChange =  e => {
+        const { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+     handleSubmit = async e => {
         e.preventDefault()
     }
-    return (
-        <StyledDiv>
-            <div className="wrap">
-                <h2>Login</h2>
 
-                <div className="formWrap">
-                    <form onSubmit={handleSubmit}>
-                        <div className="socialSignIn">
-                            <div className="row">
-                                <Button onClick={signInWithGoogle}>
-                                    Sign in with Google
-                                </Button>
+    render(){
+
+        const { email, password } = this.state
+        return (
+            <StyledDiv>
+                <div className="wrap">
+                    <h2>Login</h2>
+    
+                    <div className="formWrap">
+                        <form onSubmit={this.handleSubmit}>
+
+                        <FormInput
+                          type='email' 
+                          name='email'
+                          value={email}
+                          placeholder='email'
+                          handleChange={this.handleChange}
+                        />
+                        <FormInput
+                          type='password' 
+                          name='password'
+                          value={password}
+                          placeholder='password'
+                          handleChange={this.handleChange}
+                        />
+                        <Button type="submit">Login</Button>
+
+                            <div className="socialSignIn">
+                                <div className="row">
+                                    <Button onClick={signInWithGoogle}>
+                                        Sign in with Google
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-
-            
-        </StyledDiv>
-    )
+    
+                
+            </StyledDiv>
+        )
+    }
 }
 
 export default SignIn
