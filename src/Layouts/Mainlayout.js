@@ -3,11 +3,11 @@ import Footer from '../components/Footer'
 import Headers from '../components/Header'
 import { Global } from '../styles/global'
 
-function MainLayout({children}){
+function MainLayout({children, ...props}){
     return (
         <div>
             <Global/>
-            <Headers />
+            <Headers {...props} />
             <div className="main">
                 {children}
             </div>

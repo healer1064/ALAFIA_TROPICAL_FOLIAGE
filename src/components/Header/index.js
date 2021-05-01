@@ -1,6 +1,9 @@
 import React from 'react'
+import { findRenderedComponentWithType } from 'react-dom/test-utils'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
+import { auth } from '../../firebase/utils'
 
 const StyledHeader = styled.header`
     height: 6.5rem;
@@ -33,7 +36,13 @@ const StyledHeader = styled.header`
             }
 
             li {
+                display: inline-block;
                 list-style-type: none;
+                margin-right: 1.5rem;
+
+                &:last-child {
+                    margin-right: 0;
+                }
 
                 a {
                     font-size: 1.8rem;
@@ -48,7 +57,7 @@ const StyledHeader = styled.header`
     }
 `
 
-function Header(props){
+function Header({currentUser}){
     return(
         <StyledHeader>
             <div className="wrap">
@@ -59,15 +68,33 @@ function Header(props){
                     </div>
                 </Link>
                 <div className="callToActions">
-                    <ul>
-                        <li>
-                            <Link to="/registration">Register</Link>
-                        </li>
-                    </ul>
+                    {currentUser && (
+                        <ul>
+                            <li>
+                                <span onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
+                                    LOGOUT
+                                </span>
+                            </li>
+                        </ul>
+                    )}
+                    {!currentUser && (
+                        <ul>
+                            <li>
+                                <Link to="/registration">Register</Link>
+                            </li>
+                            <li>
+                                <Link to="/login">Login</Link>
+                            </li>
+                        </ul>
+                     )}
                 </div>
             </div>
         </StyledHeader>
     )
+}
+
+Header.defaultProps = {
+    currentUser: null
 }
 
 export default Header
