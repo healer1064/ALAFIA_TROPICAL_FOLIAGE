@@ -42,6 +42,7 @@ const initialState = {
     email: '',
     password: '',
     confirmPassword: '',
+    errors: []
 }
 class SignUp extends Component{
     constructor(props){
@@ -60,17 +61,51 @@ class SignUp extends Component{
         })
     }
 
+    handleFormSubmit = async e => {
+        e.preventDefault()
+        const { displayName, email, password, confirmPassword } = this.state
+        if(password !== confirmPassword){
+            const err = ["Passwords do not match."]
+            this.setState({errors: err})
+            return
+        }
+
+        try {
+            
+            /* Function expects username and password, which is destructured above
+                        destructure user object from the submission*/
+            const {user} = await auth.createUserWithEmailAndPassword(email, password)
+            //Write to the database with the user object, and also passing display name...
+            await handleUserProfile(user, {displayName})
+            this.setState({
+                ...initialState
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     render(){
         //State properties
-        const { displayName, email, password, confirmPassword} = this.state
+        const { displayName, email, password, confirmPassword, errors} = this.state
         return (
             <StyledDiv>
                 <div className="wrap">
                     <h2>SignUp</h2>
-    
+
+                {errors.length > 0 && (
+                    <ul>
+                        {errors.map((err, index) => {
+                            return (
+                                <li key={index}>{err}</li>
+                            )
+                        })}
+                    </ul>
+                )}
+
                 <div className="formWrap">
-                        <form>
-                            {displayName}
+                        <form onSubmit={this.handleFormSubmit}>
                             
                             <FormInput
                                 type='text'
