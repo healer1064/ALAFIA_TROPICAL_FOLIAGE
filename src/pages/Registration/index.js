@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import SignUp from '../../components/SignUp'
 
 const StyledDiv = styled.div`
 
@@ -8,7 +9,7 @@ const StyledDiv = styled.div`
 function Registration(props){
     return (
         <StyledDiv>
-            <h1>Registration Page</h1>
+            <SignUp />
         </StyledDiv>
     )
 }
