@@ -17,12 +17,10 @@ const StyledButton = styled.button`
     cursor: pointer;
 `
 
-function Button({ children, ...otherProps}){
+export default function Button({ children, ...otherProps}){
     return (
         <StyledButton {...otherProps}>
             {children}
         </StyledButton>
     )
 }
-
-export default Button
