@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledButton = styled.button`
     display: block;
-    
+    width: 100%;
     padding: .7rem 7rem;
     margin: 0 auto;
     background: black;

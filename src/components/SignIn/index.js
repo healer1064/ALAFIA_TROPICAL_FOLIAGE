@@ -3,37 +3,11 @@ import styled from 'styled-components'
 import { auth, signInWithGoogle } from './../../firebase/utils'
 
 //FORM COMPONENTS
+import AuthWrapper from './../AuthWrapper'
 import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
-const StyledDiv = styled.div`
-    display: block;
-    width: 100%;
-    max-width: 40.0rem;
-    border: 1px solid black;
-    margin: 4rem auto 6rem;
 
-    .wrap {
-        padding: 10px;
-
-        h2 {
-            font-size: 2.2rem;
-            line-height: 1;
-            font-weight: 400;
-            text-transform: uppercase;
-            display block;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-            margin: 0 auto 3rem;
-        }
-
-        .socialSignIn {
-            margin: .5rem auto 0;
-        }
-
-    }
-`
 
 const initialState = {
     email: '',
@@ -77,9 +51,7 @@ class SignIn extends Component{
 
         const { email, password } = this.state
         return (
-            <StyledDiv>
-                <div className="wrap">
-                    <h2>Login</h2>
+                <AuthWrapper>
     
                     <div className="formWrap">
                         <form onSubmit={this.handleSubmit}>
@@ -109,10 +81,8 @@ class SignIn extends Component{
                             </div>
                         </form>
                     </div>
-                </div>
-    
                 
-            </StyledDiv>
+            </AuthWrapper>
         )
     }
 }

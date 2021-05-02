@@ -3,13 +3,15 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { auth, handleUserProfile } from './firebase/utils'
 import "fontsource-open-sans"
 
-//Layouts 
+// LAYOUTS
 import MainLayout from './Layouts/Mainlayout'
 
-//Pages
+// PAGES
 import Homepage from './pages/Homepage'
 import Registration from './pages/Registration'
 import Login from './pages/Login'
+import Recovery from './pages/Recovery'
+
 
 const intialState = {
   currentUser: null
@@ -71,6 +73,13 @@ class App extends Component {
                   <Login />
                 </MainLayout>
             )} />
+            <Route exact path="/recovery" 
+             render={() => (
+               <MainLayout>
+                 <Recovery />
+               </MainLayout>
+             )}
+            />
         </Switch>
       </div>
     )
