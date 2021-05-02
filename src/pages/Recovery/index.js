@@ -1,14 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 
-const StyledDiv = styled.div`
+// COMPONENTS
+import EmailPassword from '../../components/EmailPassword'
 
-`
 
 export default function Recovery(props){
     return (
-        <StyledDiv>
-            <h1>Recovery Page</h1>
-        </StyledDiv>
+        <EmailPassword />
     )
 }

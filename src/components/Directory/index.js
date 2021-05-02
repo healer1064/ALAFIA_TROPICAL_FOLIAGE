@@ -47,7 +47,7 @@ const StyledDiv = styled.div`
     }
 `
 
-function Directory(props){
+export default function Directory(props){
     return(
         <StyledDiv>
             <div className="wrapper">
@@ -60,5 +60,3 @@ function Directory(props){
         </StyledDiv>
     )
 }
-
-export default Directory

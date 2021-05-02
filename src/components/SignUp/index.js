@@ -1,42 +1,13 @@
 import React, { Component} from 'react'
-import styled from 'styled-components'
 
-//COMPONENTS
+// COMPONENTS
+import AuthWrapper from '../AuthWrapper'
 import FormInput from '../forms/FormInput'
 import Button from '../forms/Button'
 
-//FIREBASE UTILS
+// FIREBASE UTILS
 import { auth, handleUserProfile } from '../../firebase/utils'
 
-const StyledDiv = styled.div`
-    display: block;
-    width: 100%;
-    max-width: 40.0rem;
-    border: 1px solid black;
-    margin: 4rem auto 6rem;
-
-    .wrap {
-        padding: 10px;
-
-        h2 {
-            font-size: 2.2rem;
-            line-height: 1;
-            font-weight: 400;
-            text-transform: uppercase;
-            display block;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-            margin: 0 auto;
-        }
-
-        .formWrap {
-            margin: 3rem auto 0;
-        }
-
-    }
-
-`
 const initialState = {
     displayName: '',
     email: '',
@@ -89,24 +60,26 @@ class SignUp extends Component{
     render(){
         //State properties
         const { displayName, email, password, confirmPassword, errors} = this.state
+        const configAuthWrapper = {
+            headLine: 'Registration'
+        }
         return (
-            <StyledDiv>
-                <div className="wrap">
-                    <h2>SignUp</h2>
-
-                {errors.length > 0 && (
-                    <ul>
-                        {errors.map((err, index) => {
-                            return (
-                                <li key={index}>{err}</li>
-                            )
-                        })}
-                    </ul>
-                )}
-
+            
+            <AuthWrapper {...configAuthWrapper}>
+                
                 <div className="formWrap">
+
+
                         <form onSubmit={this.handleFormSubmit}>
-                            
+                            {errors.length > 0 && (
+                                <ul>
+                                    {errors.map((err, index) => {
+                                        return (
+                                            <li key={index}>{err}</li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
                             <FormInput
                                 type='text'
                                 name='displayName'
@@ -146,8 +119,7 @@ class SignUp extends Component{
                         </form>
                     </div>
 
-                </div>
-            </StyledDiv>
+            </AuthWrapper>
         )
     }
 }

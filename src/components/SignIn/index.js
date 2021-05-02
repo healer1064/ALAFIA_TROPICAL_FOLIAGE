@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+
+// FIRBASE 
 import { auth, signInWithGoogle } from './../../firebase/utils'
 
 //FORM COMPONENTS
@@ -50,8 +51,11 @@ class SignIn extends Component{
     render(){
 
         const { email, password } = this.state
+        const configAuthWrapper = {
+            headLine: 'Login'
+        }
         return (
-                <AuthWrapper>
+                <AuthWrapper {...configAuthWrapper}>
     
                     <div className="formWrap">
                         <form onSubmit={this.handleSubmit}>
@@ -60,20 +64,21 @@ class SignIn extends Component{
                           type='email' 
                           name='email'
                           value={email}
-                          placeholder='email'
+                          placeholder='Email'
                           handleChange={this.handleChange}
                         />
                         <FormInput
                           type='password' 
                           name='password'
                           value={password}
-                          placeholder='password'
+                          placeholder='Password'
                           handleChange={this.handleChange}
                         />
                         <Button type="submit">Login</Button>
 
                             <div className="socialSignIn">
                                 <div className="row">
+
                                     <Button onClick={signInWithGoogle}>
                                         Sign in with Google
                                     </Button>
