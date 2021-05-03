@@ -27,6 +27,17 @@ const StyledAuth = styled.div`
                 margin: .5rem auto 0;
             }
 
+            .links {
+                display: block;
+                width: 100%;
+                margin: 1.5rem auto 0;
+
+                a {
+                    color: black;
+                }
+
+            }
+
         }
 
 `

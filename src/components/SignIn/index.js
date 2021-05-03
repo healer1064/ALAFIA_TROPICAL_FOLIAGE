@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // FIRBASE 
 import { auth, signInWithGoogle } from './../../firebase/utils'
@@ -84,6 +85,11 @@ class SignIn extends Component{
                                     </Button>
                                 </div>
                             </div>
+
+                            <div className="links">
+                                <Link to='/recovery'>Reset Password</Link>
+                            </div>
+
                         </form>
                     </div>
                 
