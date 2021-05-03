@@ -1,7 +1,7 @@
 import { userTypes } from './userTypes'
 
 const initialState = {
-    currentUser = null
+    currentUser: null
 }
 
 export const userReducer = (state = initialState, action) => {
