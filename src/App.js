@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import "fontsource-open-sans"
@@ -18,15 +18,12 @@ import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Recovery from './pages/Recovery'
 
-class App extends Component {
+const App = ({ currentUser, setCurrentUser }) => {
 
-  authListener = null
-  componentDidMount(){
+  useEffect(() => {
 
-    const { setCurrentUser } = this.props
-
-    this.authListener = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth){
+    const authListener = auth.onAuthStateChanged(async userAuth => {
+      if(userAuth){ 
         const userRef = await handleUserProfile(userAuth)
         userRef.onSnapshot(snapshot => {
           setCurrentUser({
@@ -35,19 +32,22 @@ class App extends Component {
             ...userAuth
           })
         })
+
       }
 
       setCurrentUser(userAuth)
       
     })
-  }
 
-  componentWillUnmount(){
-    this.authListener()
-  }
+    return () => {
+      authListener()
+    }
+
+  },[])
+
+
   
-  render(){
-    const { currentUser } = this.props
+
     return (
       <div className="App">
         <Switch>
@@ -78,7 +78,7 @@ class App extends Component {
         </Switch>
       </div>
     )
-  }
+  
 }
 
 const mapStateToProps = ({ user }) => ({
