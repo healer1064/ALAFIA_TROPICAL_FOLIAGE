@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // FIRBASE 
@@ -11,69 +11,58 @@ import Button from './../forms/Button'
 
 
 
-const initialState = {
-    email: '',
-    password: '',
-}
+export default function SignIn(){
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    
 
-class SignIn extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            ...initialState
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    const resetForm = () => {
+        setEmail('')
+        setPassword('')
     }
 
-    handleChange =  e => {
-        const { name, value } = e.target
-        this.setState({
-            [name]: value
-        })
-    }
-
-     handleSubmit = async e => {
+     const handleSubmit = async e => {
         e.preventDefault()
-        const { email, password } = this.state
 
         try {
 
-            await auth.signInWithEmailAndPassword(email, password)
-            this.setState({
-                ...initialState
-            })
-            
-        } catch (error) {
-            console.log(error)
+                await auth.signInWithEmailAndPassword(email, password)
+                resetForm()
+                
+            } catch (error) {
+                console.error(error.message)
+                setError(error.message)
+            }
         }
-    }
 
-    render(){
-
-        const { email, password } = this.state
+    
         const configAuthWrapper = {
             headLine: 'Login'
         }
+
         return (
                 <AuthWrapper {...configAuthWrapper}>
     
                     <div className="formWrap">
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={handleSubmit}>
+
+                        {error && (<div style={{color: 'red'}}>{error}</div>)}
+                        
 
                         <FormInput
                           type='email' 
                           name='email'
                           value={email}
                           placeholder='Email'
-                          handleChange={this.handleChange}
+                          handleChange={e => setEmail(e.target.value)}
                         />
                         <FormInput
                           type='password' 
                           name='password'
                           value={password}
                           placeholder='Password'
-                          handleChange={this.handleChange}
+                          handleChange={e => setPassword(e.target.value)}
                         />
                         <Button type="submit">Login</Button>
 
@@ -95,7 +84,6 @@ class SignIn extends Component{
                 
             </AuthWrapper>
         )
-    }
+    
 }
 
-export default SignIn
