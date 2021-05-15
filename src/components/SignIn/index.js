@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 // FIRBASE 
 import { auth, signInWithGoogle } from './../../firebase/utils'
@@ -11,7 +11,7 @@ import Button from './../forms/Button'
 
 
 
-export default function SignIn(){
+const SignIn = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -28,6 +28,7 @@ export default function SignIn(){
 
                 await auth.signInWithEmailAndPassword(email, password)
                 resetForm()
+                props.history.push('/')
                 
             } catch (error) {
                 console.error(error.message)
@@ -85,4 +86,6 @@ export default function SignIn(){
         )
     
 }
+
+export default withRouter(SignIn)
 

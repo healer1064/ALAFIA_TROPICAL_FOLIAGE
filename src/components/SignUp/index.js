@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 
 // COMPONENTS
 import AuthWrapper from '../AuthWrapper'
@@ -11,7 +12,7 @@ import { auth, handleUserProfile } from '../../firebase/utils'
 
 
 
-export default function SignUp(){
+const SignUp = (props) => {
     const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -46,6 +47,7 @@ export default function SignUp(){
             await handleUserProfile(user, {displayName})
             //RESET FORM
             resetForm()
+            props.history.push('/')
 
         } catch (error) {
             console.error(error)
@@ -121,3 +123,5 @@ export default function SignUp(){
         )
     
 }
+
+export default withRouter(SignUp)

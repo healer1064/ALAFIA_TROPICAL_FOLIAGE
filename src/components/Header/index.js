@@ -72,6 +72,9 @@ function Header({currentUser}){
                     {currentUser && (
                         <ul>
                             <li>
+                                <Link to="/dashboard">My Account</Link>
+                            </li>
+                            <li>
                                 <span onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
                                     LOGOUT
                                 </span>
@@ -80,6 +83,7 @@ function Header({currentUser}){
                     )}
                     {!currentUser && (
                         <ul>
+                            
                             <li>
                                 <Link to="/registration">Register</Link>
                             </li>

@@ -3,6 +3,9 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import "fontsource-open-sans"
 
+//HIGHER ORDER COMPONENTS
+import WithAuth from './hoc/withAuth'
+
 // ACTION CREATORS
 import { setCurrentUser } from './redux/user/user.actions'
 
@@ -17,6 +20,7 @@ import Homepage from './pages/Homepage'
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Recovery from './pages/Recovery'
+import Dashboard from './pages/Dashboard'
 
 const App = ({ currentUser, setCurrentUser }) => {
 
@@ -46,10 +50,9 @@ const App = ({ currentUser, setCurrentUser }) => {
   },[])
 
 
-  
-
     return (
       <div className="App">
+
         <Switch>
             <Route exact path="/" render={() => (
               <MainLayout>
@@ -57,13 +60,13 @@ const App = ({ currentUser, setCurrentUser }) => {
               </MainLayout>
             )} />
             <Route exact path="/registration"
-              render={() =>  currentUser ? <Redirect to='/'/> : (
+              render={() => (
               <MainLayout>
                 <Registration />
               </MainLayout>
             )} />
             <Route exact path="/login" 
-              render={() => currentUser ? <Redirect to='/'/> : (
+              render={() => (
                 <MainLayout>
                   <Login />
                 </MainLayout>
@@ -75,7 +78,18 @@ const App = ({ currentUser, setCurrentUser }) => {
                </MainLayout>
              )}
             />
+            <Route exact path="/dashboard" 
+             render={() => (
+               <WithAuth>
+                 <MainLayout>
+                    <Dashboard />
+                 </MainLayout>
+               </WithAuth>
+               
+             )}
+            />
         </Switch>
+
       </div>
     )
   
