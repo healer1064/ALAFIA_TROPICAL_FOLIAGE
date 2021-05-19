@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 // FIRBASE 
@@ -9,32 +10,40 @@ import AuthWrapper from './../AuthWrapper'
 import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
+// ACTIONS 
+import { signInUser } from '../../redux/user/user.actions'
 
+
+
+const mapState = ({ user }) => ({
+    signInSuccess: user.signInSuccess
+})
 
 const SignIn = (props) => {
+    const { signInSuccess } = useSelector(mapState)
+    const dispatch = useDispatch() // just a function that is called
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        // signInSuccess can changes asynchronously, and watch for changes
+        if (signInSuccess){
+            resetForm()
+            props.history.push('/')
+        }
+    },[signInSuccess]) // keep it as a dependency
 
     const resetForm = () => {
         setEmail('')
         setPassword('')
     }
 
-     const handleSubmit = async e => {
+     const handleSubmit = e => {
         e.preventDefault()
-
-        try {
-
-                await auth.signInWithEmailAndPassword(email, password)
-                resetForm()
-                props.history.push('/')
-                
-            } catch (error) {
-                console.error(error.message)
-                setError(error.message)
-            }
-        }
+        dispatch(signInUser({ email, password }))
+    }
 
     
         const configAuthWrapper = {
