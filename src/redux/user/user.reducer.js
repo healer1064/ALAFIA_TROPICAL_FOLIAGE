@@ -2,7 +2,8 @@ import { userTypes } from './userTypes'
 
 const initialState = {
     currentUser: null,
-    signInSuccess: false
+    signInSuccess: false,
+    signInError: '',
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 signInSuccess: action.payload
+            }
+        case userTypes.SIGN_IN_FAILED:
+            return {
+                ...state,
+                signInError: action.payload
             }
         default:
             return state

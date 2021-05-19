@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
-// FIRBASE 
+// FIREBASE 
 import { auth, signInWithGoogle } from './../../firebase/utils'
 
 //FORM COMPONENTS
@@ -16,11 +16,12 @@ import { signInUser } from '../../redux/user/user.actions'
 
 
 const mapState = ({ user }) => ({
-    signInSuccess: user.signInSuccess
+    signInSuccess: user.signInSuccess,
+    signInError: user.signInError
 })
 
 const SignIn = (props) => {
-    const { signInSuccess } = useSelector(mapState)
+    const { signInSuccess, signInError } = useSelector(mapState)
     const dispatch = useDispatch() // just a function that is called
 
     const [email, setEmail] = useState('')
@@ -28,10 +29,12 @@ const SignIn = (props) => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        // signInSuccess can changes asynchronously, and watch for changes
+        // signInSuccess can change asynchronously, and watch for changes
         if (signInSuccess){
             resetForm()
             props.history.push('/')
+        } else {
+            setError(signInError)
         }
     },[signInSuccess]) // keep it as a dependency
 

@@ -16,6 +16,10 @@ export const signInUser = ({email, password}) => async dispatch => {
                 
         } catch (error) {
              console.error(error.message)
-             //setError(error.message)
+             dispatch({
+                 type: userTypes.SIGN_IN_FAILED,
+                 payload: error.message
+             })
         }
 }
+
