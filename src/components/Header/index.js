@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { auth } from '../../firebase/utils'
 
@@ -57,8 +56,12 @@ const StyledHeader = styled.header`
 
     }
 `
+const mapState = ({user}) => ({
+    currentUser: user.currentUser
+})
+export default function Header(props){
+    const { currentUser } = useSelector(mapState)
 
-function Header({currentUser}){
     return(
         <StyledHeader>
             <div className="wrap">
@@ -102,8 +105,4 @@ Header.defaultProps = {
     currentUser: null
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser: user.currentUser
-})
 
-export default connect(mapStateToProps, {})(Header)
