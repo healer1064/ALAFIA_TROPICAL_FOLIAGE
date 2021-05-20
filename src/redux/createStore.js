@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 import rootReducer from './rootReducer'
 
 //REDUX MIDDLEWARES
-export const middlewares = [logger, thunk]
+export const middlewares = [thunk, logger]
 
 
 //THE STORE

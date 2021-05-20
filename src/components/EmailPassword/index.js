@@ -32,14 +32,12 @@ const EmailPassword = (props) => {
     }
 
     useEffect(() => {
-        
         if(resetPasswordSuccess){
             setMessage('Please check the email asscociated with the account.')
             setTimeout(function(){ 
                 props.history.push('/login')
                 window.location.reload()
             },3500)
-            
         }
     },[resetPasswordSuccess])
 
@@ -58,7 +56,7 @@ const EmailPassword = (props) => {
         const configAuthWrapper = {
             headLine: 'Email Password'
         }
-        return(
+        return (
             <AuthWrapper {...configAuthWrapper}>
                 <div className="formWrap">
 
