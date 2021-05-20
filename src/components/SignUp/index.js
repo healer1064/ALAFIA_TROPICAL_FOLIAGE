@@ -46,6 +46,7 @@ const SignUp = (props) => {
         if(signUpError_auth){
             setAuthError(signUpError_auth)
         }
+        setAuthError('')
     }, [signUpError_auth])
 
     const resetForm = () => {

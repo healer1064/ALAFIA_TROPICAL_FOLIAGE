@@ -19,7 +19,8 @@ export const userReducer = (state = initialState, action) => {
         case userTypes.SIGN_IN_SUCCESS:
             return {
                 ...state,
-                signInSuccess: action.payload
+                signInSuccess: action.payload,
+                signInError: ''
             }
         case userTypes.SIGN_UP_SUCCESS:
             return {

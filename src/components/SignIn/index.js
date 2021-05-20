@@ -33,10 +33,12 @@ const SignIn = (props) => {
         if (signInSuccess){
             resetForm()
             props.history.push('/')
-        } else {
-            setError(signInError)
         }
     },[signInSuccess]) // keep it as a dependency
+
+    useEffect(() => {
+        signInError ? setError(signInError) : setError('')
+    }, [signInError])
 
     const resetForm = () => {
         setEmail('')
@@ -81,7 +83,7 @@ const SignIn = (props) => {
                             <div className="socialSignIn">
                                 <div className="row">
 
-                                    <Button onClick={signInWithGoogle}>
+                                    <Button onClick={() => signInWithGoogle().then(props.history.push('/'))}>
                                         Sign in with Google
                                     </Button>
                                 </div>

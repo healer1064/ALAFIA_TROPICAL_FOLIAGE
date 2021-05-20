@@ -78,7 +78,7 @@ export default function Header(props){
                                 <Link to="/dashboard">My Account</Link>
                             </li>
                             <li>
-                                <span onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
+                                <span onClick={() => auth.signOut().then(window.location.reload())} style={{cursor: 'pointer'}}>
                                     LOGOUT
                                 </span>
                             </li>
