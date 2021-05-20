@@ -1,5 +1,6 @@
 import  { userTypes } from './userTypes'
-import {  auth, handleUserProfile } from '../../firebase/utils'
+import {  auth, handleUserProfile, } from '../../firebase/utils'
+import { GoogleProvider } from '../../firebase/utils'
 
 export const setCurrentUser = user => ({
     type: userTypes.SET_CURRENT_USER,
@@ -81,4 +82,19 @@ export const resetPassword = ({ email }) => async dispatch => {
         } catch(error) {
             // console.error(error)
         }
+}
+
+export const signInWithGoogle = () => async dispatch => {
+    try {
+        await auth.signInWithPopup(GoogleProvider)
+            .then(() => {
+                dispatch({
+                    type: userTypes.SIGN_IN_SUCCESS,
+                    payload: true
+                })
+            })
+    } catch (error) {
+        // console.log(error.message)
+    }
+    
 }
