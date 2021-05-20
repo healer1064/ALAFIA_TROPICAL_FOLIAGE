@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 // FIREBASE 
-import { auth, signInWithGoogle } from './../../firebase/utils'
+import { signInWithGoogle } from './../../firebase/utils'
 
 //FORM COMPONENTS
 import AuthWrapper from './../AuthWrapper'

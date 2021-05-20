@@ -3,7 +3,7 @@ import Footer from '../components/Footer'
 import Headers from '../components/Header'
 import { Global } from '../styles/global'
 
-function MainLayout({children, ...props}){
+export default function MainLayout({ children, ...props }){
     return (
         <div>
             <Global/>
@@ -15,5 +15,3 @@ function MainLayout({children, ...props}){
         </div>
     )
 }
-
-export default MainLayout
