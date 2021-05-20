@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 // COMPONENTS
@@ -6,19 +7,46 @@ import AuthWrapper from '../AuthWrapper'
 import FormInput from '../forms/FormInput'
 import Button from '../forms/Button'
 
-// FIREBASE UTILS
-import { auth, handleUserProfile } from '../../firebase/utils'
+//ACTION CREATORS
+import { signUpUser } from '../.././redux/user/user.actions'
 
 
 
+const mapState = ({ user }) => ({
+    signUpSuccess: user.signUpSuccess,
+    signUpError: user.signUpError,
+    signUpError_auth: user.signUpError_auth
+})
 
 const SignUp = (props) => {
+    const dispatch = useDispatch()
+    const { signUpSuccess, signUpError, signUpError_auth } = useSelector(mapState)
+
     const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState([])
     const [authError, setAuthError] = useState('')
+
+    useEffect(() => {
+        if(signUpSuccess){
+            resetForm()
+            props.history.push('/')
+        }
+    }, [signUpSuccess])
+
+    useEffect(() => {
+        if(Array.isArray(signUpError) && signUpError.length > 0){
+            setErrors(signUpError)
+        }
+    }, [signUpError])
+
+    useEffect(() => {
+        if(signUpError_auth){
+            setAuthError(signUpError_auth)
+        }
+    }, [signUpError_auth])
 
     const resetForm = () => {
         setDisplayName('')
@@ -31,28 +59,13 @@ const SignUp = (props) => {
 
     const handleFormSubmit = async e => {
         e.preventDefault()
+        dispatch(signUpUser({
+            displayName,
+            email,
+            password,
+            confirmPassword
+        }))
         
-        if(password !== confirmPassword){
-            const err = ["Passwords do not match."]
-            setErrors(err)
-            return
-        }
-
-        try {
-            
-            /* Function expects username and password, which is destructured above
-                        destructure user object from the submission*/
-            const {user} = await auth.createUserWithEmailAndPassword(email, password)
-            //Write to the database with the user object, and also passing display name...
-            await handleUserProfile(user, {displayName})
-            //RESET FORM
-            resetForm()
-            props.history.push('/')
-
-        } catch (error) {
-            console.error(error)
-            setAuthError(error.message)
-        }
     }
         
         const configAuthWrapper = {
