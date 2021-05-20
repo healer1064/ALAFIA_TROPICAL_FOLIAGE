@@ -58,7 +58,7 @@ const SignUp = (props) => {
     }
 
 
-    const handleFormSubmit = async e => {
+    const handleFormSubmit = e => {
         e.preventDefault()
         dispatch(signUpUser({
             displayName,

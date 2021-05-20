@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-// FIREBASE 
-import { auth } from './../../firebase/utils'
+// ACTION CREATORS
+import { resetPassword } from '../../redux/user/user.actions'
+
 
 // COMPONENTS
 import AuthWrapper from './../AuthWrapper'
@@ -10,41 +12,47 @@ import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 
+const mapState = ({ user }) => ({
+    resetPasswordSuccess: user.resetPasswordSuccess,
+    resetPasswordError: user.resetPasswordError
+})
 
 const EmailPassword = (props) => {
+    const { resetPasswordSuccess, resetPasswordError } = useSelector(mapState)
+    const dispatch = useDispatch()
+
+
     const [email, setEmail] = useState('')
     const [errors, setErrors] = useState([])
-    const [authError, setAuthError] = useState('')
+    const [message, setMessage] = useState('')
 
     const resetForm = () => {
         setEmail('')
         setErrors([])
     }
+
+    useEffect(() => {
+        
+        if(resetPasswordSuccess){
+            setMessage('Please check the email asscociated with the account.')
+            setTimeout(function(){ 
+                props.history.push('/login')
+                window.location.reload()
+            },3500)
+            
+        }
+    },[resetPasswordSuccess])
+
+    useEffect(() => {
+        if(Array.isArray(resetPasswordError) && resetPasswordError.length > 0 ){
+            setErrors(resetPasswordError)
+        }
+    },[resetPasswordError])
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        try {
-
-            const config = {
-                url: 'http://localhost:3000/login'//Change this for production
-            }
-
-            await auth.sendPasswordResetEmail(email, config)
-            .then(() => {
-                props.history.push('/login')
-                resetForm()
-            })
-            .catch(() => {
-                const err = ['Email not found. Please try again.']
-                setErrors(err)
-            })
-
-        } catch(error) {
-            console.error(error)
-            setAuthError(error.message)
-        }
-
+        dispatch(resetPassword({ email }))
+        resetForm()
     }
  
         const configAuthWrapper = {
@@ -65,7 +73,7 @@ const EmailPassword = (props) => {
                         </ul>
                     )}
 
-                    {authError && <div style={{color: 'red'}}>{authError}</div>}
+                    {message && <div style={{color: 'green'}}>{message}</div>}
 
                     <form onSubmit={handleSubmit}>
                         <FormInput 

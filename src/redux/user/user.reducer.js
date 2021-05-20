@@ -7,6 +7,9 @@ const initialState = {
     signInError: '',
     signUpError: [],
     signUpError_auth: '',
+
+    resetPasswordSuccess: false,
+    resetPasswordError: []
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -41,6 +44,17 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 signUpError_auth: action.payload
+            }
+
+        case userTypes.RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                resetPasswordSuccess: action.payload
+            }
+        case userTypes.RESET_PASSWORD_FAILED:
+            return {
+                ...state,
+                resetPasswordError: action.payload
             }
         default:
             return state
