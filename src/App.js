@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import "fontsource-open-sans"
 
 //HIGHER ORDER COMPONENTS
@@ -22,7 +22,8 @@ import Login from './pages/Login'
 import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
 
-const App = ({ currentUser, setCurrentUser }) => {
+export default function App(props){
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -30,16 +31,18 @@ const App = ({ currentUser, setCurrentUser }) => {
       if(userAuth){ 
         const userRef = await handleUserProfile(userAuth)
         userRef.onSnapshot(snapshot => {
-          setCurrentUser({
+
+          dispatch(setCurrentUser({
             id: snapshot.id,
             ...snapshot.data(),
             ...userAuth
-          })
+          }))
+
         })
 
       }
 
-      setCurrentUser(userAuth)
+      dispatch(setCurrentUser(userAuth))
       
     })
 
@@ -95,12 +98,5 @@ const App = ({ currentUser, setCurrentUser }) => {
   
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
-})
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps )(App)
+ 
