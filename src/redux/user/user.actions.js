@@ -2,6 +2,21 @@ import  { userTypes } from './userTypes'
 import {  auth, handleUserProfile, } from '../../firebase/utils'
 import { GoogleProvider } from '../../firebase/utils'
 
+
+
+export const emailSignInStart = userCredentials => ({
+    type: userTypes.EMAIL_SIGN_IN_START,
+    payload: userCredentials
+})
+
+export const signInSuccess = user => ({
+    type: userTypes.SIGN_IN_SUCCESS,
+    payload: user
+})
+
+
+
+
 export const setCurrentUser = user => ({
     type: userTypes.SET_CURRENT_USER,
     payload: user
