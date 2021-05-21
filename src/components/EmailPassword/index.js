@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // ACTION CREATORS
-import { resetPassword } from '../../redux/user/user.actions'
+import { resetAllAuthForms, resetPassword } from '../../redux/user/user.actions'
 
 
 // COMPONENTS
@@ -35,6 +35,7 @@ const EmailPassword = (props) => {
         if(resetPasswordSuccess){
             setMessage('Please check the email asscociated with the account.')
             setTimeout(function(){ 
+                dispatch(resetAllAuthForms)
                 props.history.push('/login')
                 window.location.reload()
             },3500)
@@ -59,7 +60,6 @@ const EmailPassword = (props) => {
         return (
             <AuthWrapper {...configAuthWrapper}>
                 <div className="formWrap">
-
                     {/* ERRORS */}
                     {errors.length > 0 && (
                         <ul>
@@ -70,9 +70,7 @@ const EmailPassword = (props) => {
                             })}
                         </ul>
                     )}
-
                     {message && <div style={{color: 'green'}}>{message}</div>}
-
                     <form onSubmit={handleSubmit}>
                         <FormInput 
                             type="email"

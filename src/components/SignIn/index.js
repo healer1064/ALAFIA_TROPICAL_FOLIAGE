@@ -8,7 +8,7 @@ import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 // ACTIONS 
-import { signInUser, signInWithGoogle } from '../../redux/user/user.actions'
+import { signInUser, signInWithGoogle, resetAllAuthForms } from '../../redux/user/user.actions'
 
 
 
@@ -29,6 +29,7 @@ const SignIn = (props) => {
         // signInSuccess can change asynchronously, and watch for changes
         if (signInSuccess){
             resetForm()
+            dispatch(resetAllAuthForms)
             props.history.push('/')
         }
     },[signInSuccess]) // keep it as a dependency
@@ -62,24 +63,23 @@ const SignIn = (props) => {
                     <div className="formWrap">
                         <form onSubmit={handleSubmit}>
 
-                        {error && (<div style={{color: 'red'}}>{error}</div>)}
-                        
-
-                        <FormInput
-                          type='email' 
-                          name='email'
-                          value={email}
-                          placeholder='Email'
-                          handleChange={e => setEmail(e.target.value)}
-                        />
-                        <FormInput
-                          type='password' 
-                          name='password'
-                          value={password}
-                          placeholder='Password'
-                          handleChange={e => setPassword(e.target.value)}
-                        />
-                        <Button type="submit">Login</Button>
+                            {error && (<div style={{color: 'red'}}>{error}</div>)}
+                            
+                            <FormInput
+                            type='email' 
+                            name='email'
+                            value={email}
+                            placeholder='Email'
+                            handleChange={e => setEmail(e.target.value)}
+                            />
+                            <FormInput
+                            type='password' 
+                            name='password'
+                            value={password}
+                            placeholder='Password'
+                            handleChange={e => setPassword(e.target.value)}
+                            />
+                            <Button type="submit">Login</Button>
 
                             <div className="socialSignIn">
                                 <div className="row">

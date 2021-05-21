@@ -8,7 +8,7 @@ import FormInput from '../forms/FormInput'
 import Button from '../forms/Button'
 
 //ACTION CREATORS
-import { signUpUser } from '../.././redux/user/user.actions'
+import { resetAllAuthForms, signUpUser } from '../.././redux/user/user.actions'
 
 
 
@@ -27,11 +27,12 @@ const SignUp = (props) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState([])
-    const [authError, setAuthError] = useState('')
+    // const [authError, setAuthError] = useState('')
 
     useEffect(() => {
         if(signUpSuccess){
             resetForm()
+            dispatch(resetAllAuthForms)
             props.history.push('/')
         }
     }, [signUpSuccess])
@@ -42,12 +43,12 @@ const SignUp = (props) => {
         }
     }, [signUpError])
 
-    useEffect(() => {
-        if(signUpError_auth){
-            setAuthError(signUpError_auth)
-        }
-        setAuthError('')
-    }, [signUpError_auth])
+    // useEffect(() => {
+    //     if(signUpError_auth){
+    //         setAuthError(signUpError_auth)
+    //     }
+    //     setAuthError('')
+    // }, [signUpError_auth])
 
     const resetForm = () => {
         setDisplayName('')
@@ -79,8 +80,6 @@ const SignUp = (props) => {
             <AuthWrapper {...configAuthWrapper}>
                 
                 <div className="formWrap">
-
-
                         <form onSubmit={handleFormSubmit}>
                             {errors.length > 0 && (
                                 <ul>
@@ -91,9 +90,7 @@ const SignUp = (props) => {
                                     })}
                                 </ul>
                             )}
-
-                            {authError && (<div style={{color: 'red'}}>{authError}</div>)}
-
+                            {signUpError_auth && (<div style={{color: 'red'}}>{signUpError_auth}</div>)}
                             <FormInput
                                 type='text'
                                 name='displayName'
@@ -129,7 +126,6 @@ const SignUp = (props) => {
                             <Button type="submit">
                                 Register
                             </Button>
-
                         </form>
                     </div>
 

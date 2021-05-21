@@ -98,3 +98,7 @@ export const signInWithGoogle = () => async dispatch => {
     }
     
 }
+
+export const resetAllAuthForms = () => ({
+    type: userTypes.RESET_AUTH_FORMS
+})
