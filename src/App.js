@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import "fontsource-open-sans"
 
 //HIGHER ORDER COMPONENTS
 import WithAuth from './hoc/withAuth'
 
 // ACTION CREATORS
-import { setCurrentUser } from './redux/user/user.actions'
-
-// FIREBASE 
-import { auth, handleUserProfile } from './firebase/utils'
+import { checkUserSession } from './redux/user/user.actions'
 
 // LAYOUTS
 import MainLayout from './Layouts/Mainlayout'
@@ -22,42 +19,19 @@ import Login from './pages/Login'
 import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
 
-export default function App(props){
+export default function App(){
   const dispatch = useDispatch()
 
   useEffect(() => {
-
-    const authListener = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth){ 
-        const userRef = await handleUserProfile(userAuth)
-        userRef.onSnapshot(snapshot => {
-
-          dispatch(setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-            ...userAuth
-          }))
-
-        })
-
-      }
-
-      dispatch(setCurrentUser(userAuth))
-      
-    })
-
-    return () => {
-      authListener()
-    }
-
+    dispatch(checkUserSession())
   },[])
-
 
     return (
       <div className="App">
 
         <Switch>
-            <Route exact path="/" render={() => (
+            <Route exact path="/" 
+            render={() => (
               <MainLayout>
                 <Homepage />
               </MainLayout>

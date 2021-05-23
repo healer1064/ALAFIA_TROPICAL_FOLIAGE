@@ -8,17 +8,16 @@ import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 // ACTIONS 
-import { signInUser, signInWithGoogle, resetAllAuthForms } from '../../redux/user/user.actions'
+import { emailSignInStart, signInWithGoogle, resetAllAuthForms } from '../../redux/user/user.actions'
 
 
 
 const mapState = ({ user }) => ({
-    signInSuccess: user.signInSuccess,
-    signInError: user.signInError
+    currentUser: user.currentUser
 })
 
 const SignIn = (props) => {
-    const { signInSuccess, signInError } = useSelector(mapState)
+    const { currentUser } = useSelector(mapState)
     const dispatch = useDispatch() // just a function that is called
 
     const [email, setEmail] = useState('')
@@ -27,16 +26,12 @@ const SignIn = (props) => {
 
     useEffect(() => {
         // signInSuccess can change asynchronously, and watch for changes
-        if (signInSuccess){
+        if (currentUser){
             resetForm()
-            dispatch(resetAllAuthForms)
             props.history.push('/')
         }
-    },[signInSuccess]) // keep it as a dependency
+    },[currentUser]) // keep it as a dependency
 
-    useEffect(() => {
-        signInError ? setError(signInError) : setError('')
-    }, [signInError])
 
     const resetForm = () => {
         setEmail('')
@@ -45,7 +40,7 @@ const SignIn = (props) => {
 
      const handleSubmit = e => {
         e.preventDefault()
-        dispatch(signInUser({ email, password }))
+        dispatch(emailSignInStart({ email, password }))
     }
 
     const handleGoogleSignIn = () => {
@@ -66,18 +61,18 @@ const SignIn = (props) => {
                             {error && (<div style={{color: 'red'}}>{error}</div>)}
                             
                             <FormInput
-                            type='email' 
-                            name='email'
-                            value={email}
-                            placeholder='Email'
-                            handleChange={e => setEmail(e.target.value)}
+                                type='email' 
+                                name='email'
+                                value={email}
+                                placeholder='Email'
+                                handleChange={e => setEmail(e.target.value)}
                             />
                             <FormInput
-                            type='password' 
-                            name='password'
-                            value={password}
-                            placeholder='Password'
-                            handleChange={e => setPassword(e.target.value)}
+                                type='password' 
+                                name='password'
+                                value={password}
+                                placeholder='Password'
+                                handleChange={e => setPassword(e.target.value)}
                             />
                             <Button type="submit">Login</Button>
 

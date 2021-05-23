@@ -1,4 +1,4 @@
-import  { userTypes } from './userTypes'
+import  { userTypes } from './user.types'
 import {  auth, handleUserProfile, } from '../../firebase/utils'
 import { GoogleProvider } from '../../firebase/utils'
 
@@ -14,31 +14,38 @@ export const signInSuccess = user => ({
     payload: user
 })
 
-
-
-
-export const setCurrentUser = user => ({
-    type: userTypes.SET_CURRENT_USER,
-    payload: user
+export const checkUserSession = () => ({
+    type: userTypes.CHECK_USER_SESSION,
+    
 })
 
+
+
+
+// export const setCurrentUser = user => ({
+//     type: userTypes.SET_CURRENT_USER,
+//     payload: user
+// })
+
+
+
 // SIGN IN ACTION
-export const signInUser = ({email, password}) => async dispatch => {
-     try {
-            await auth.signInWithEmailAndPassword(email, password)
-            dispatch({
-                type: userTypes.SIGN_IN_SUCCESS,
-                payload: true
-            })
+// export const signInUser = ({email, password}) => async dispatch => {
+//      try {
+//             await auth.signInWithEmailAndPassword(email, password)
+//             dispatch({
+//                 type: userTypes.SIGN_IN_SUCCESS,
+//                 payload: true
+//             })
                 
-        } catch (error) {
-            // console.error(error.message)
-             dispatch({
-                 type: userTypes.SIGN_IN_FAILED,
-                 payload: error.message
-             })
-        }
-}
+//         } catch (error) {
+//             // console.error(error.message)
+//              dispatch({
+//                  type: userTypes.SIGN_IN_FAILED,
+//                  payload: error.message
+//              })
+//         }
+// }
 
 
 // SIGN UP ACTION
