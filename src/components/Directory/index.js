@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import BackgroundVideo from '../BackgroundVideo'
+
 import ShopPlants from '../../assets/pexels-daria-shevtsova-1578244.jpg'
 // import ShopColors from '../../assets/pexels-suzy-hazelwood-3834461.jpg'
+
+import plantShade from '../../assets/video.mp4'
 
 
 
@@ -26,8 +30,8 @@ const StyledDiv = styled.div`
                 height: 100%
             }
 
-            a {
-                background: white;
+            .text_container {
+                color: #fff;
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -37,9 +41,17 @@ const StyledDiv = styled.div`
                 line-height: 1;
                 font-weight: 400;
                 text-transform: uppercase;
-                background: white;
                 padding: 8px 10px;
-                border: 1px solid black;
+                display: flex;
+                flex-direction: column;
+                
+                a {
+                    text-transform: capitalize;
+                    color: #fff;
+                    padding: 8px 5px;
+                    justify-self: flex-end;
+                }
+                
             }
 
         }
@@ -51,11 +63,21 @@ export default function Directory(props){
     return(
         <StyledDiv>
             <div className="wrapper">
-                <div 
+                <div className="item">
+                    <BackgroundVideo video={plantShade} />
+                    <div className="text_container">
+                        <h1>Levins Plants</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
+                        <a href="/">find plants</a>
+                    </div>
+                    
+                </div>
+                {/* <div 
                     className="item"
                     style={{backgroundImage: `url(${ShopPlants})`}}>
+                        
                         <a href="/">Find Plants</a>
-                </div>
+                </div> */}
             </div>
         </StyledDiv>
     )

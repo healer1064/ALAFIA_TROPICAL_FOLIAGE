@@ -43,7 +43,7 @@ export const Global = createGlobalStyle`
     .main {
         width: 100%;
         height: calc(100% - 6.5rem);
-        max-width: 1450px;
+        max-width: 100%;
         padding: 0 10px;
         margin 0 auto;
     }
