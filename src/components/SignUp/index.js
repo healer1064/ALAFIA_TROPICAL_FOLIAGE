@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 
 // COMPONENTS
 import AuthWrapper from '../AuthWrapper'
 import FormInput from '../forms/FormInput'
 import Button from '../forms/Button'
 
-//ACTION CREATORS
-import { resetAllAuthForms, signUpUser } from '../.././redux/user/user.actions'
+// ACTIONS
+import { signUpUserStart } from '../../redux/user/user.actions'
+
 
 
 
 const mapState = ({ user }) => ({
-    signUpSuccess: user.signUpSuccess,
-    signUpError: user.signUpError,
-    signUpError_auth: user.signUpError_auth
+    currentUser: user.currentUser,
+    signUpUserErrors: user.signUpUserErrors,
+    signUpServerError: user.signUpServerError,
 })
 
 const SignUp = (props) => {
+    const history = useHistory()
     const dispatch = useDispatch()
-    const { signUpSuccess, signUpError, signUpError_auth } = useSelector(mapState)
+    const { currentUser, signUpUserErrors, signUpServerError } = useSelector(mapState)
 
     const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
@@ -30,25 +32,17 @@ const SignUp = (props) => {
     // const [authError, setAuthError] = useState('')
 
     useEffect(() => {
-        if(signUpSuccess){
+        if(currentUser){
             resetForm()
-            dispatch(resetAllAuthForms)
-            props.history.push('/')
+            history.push('/')
         }
-    }, [signUpSuccess])
+    }, [currentUser])
 
     useEffect(() => {
-        if(Array.isArray(signUpError) && signUpError.length > 0){
-            setErrors(signUpError)
+        if(Array.isArray(signUpUserErrors) && signUpUserErrors.length > 0){
+            setErrors(signUpUserErrors)
         }
-    }, [signUpError])
-
-    // useEffect(() => {
-    //     if(signUpError_auth){
-    //         setAuthError(signUpError_auth)
-    //     }
-    //     setAuthError('')
-    // }, [signUpError_auth])
+    }, [signUpUserErrors])
 
     const resetForm = () => {
         setDisplayName('')
@@ -61,7 +55,7 @@ const SignUp = (props) => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
-        dispatch(signUpUser({
+        dispatch(signUpUserStart({
             displayName,
             email,
             password,
@@ -90,7 +84,7 @@ const SignUp = (props) => {
                                     })}
                                 </ul>
                             )}
-                            {signUpError_auth && (<div style={{color: 'red'}}>{signUpError_auth}</div>)}
+                            { signUpServerError && (<div style={{color: 'red'}}>{ signUpServerError }</div>) }
                             <FormInput
                                 type='text'
                                 name='displayName'

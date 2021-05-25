@@ -3,6 +3,8 @@ import { userTypes } from './user.types'
 const INITIAL_STATE = {
     currentUser: null,
     serverSignUpErr: '',
+    signUpUserErrors: [],
+    signUpServerError: '',
     // signInSuccess: false,
     // signUpSuccess: false,
     // signInError: '',
@@ -70,7 +72,10 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         case userTypes.SIGN_IN_SUCCESS:
             return {
                 ...state,
-                currentUser: action.payload
+                currentUser: action.payload,
+                serverSignUpErr: '',
+                signUpUserErrors: [],
+                signUpServerError: '',
             }
         case userTypes.SIGN_OUT_USER_SUCCESS:
             return {
@@ -81,6 +86,16 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 serverSignUpErr: action.payload
+            }
+        case userTypes.SIGN_UP_USER_ERROR:
+            return {
+                ...state,
+                signUpUserErrors: action.payload
+            }
+        case userTypes.SIGN_UP_SERVER_ERROR:
+            return {
+                ...state,
+                signUpServerError: action.payload
             }
         default:
             return state

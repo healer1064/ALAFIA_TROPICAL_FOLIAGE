@@ -31,6 +31,21 @@ export const signOutUserSuccess = () => ({
 })
 
 
+// SIGN UP ACTIONS...
+export const signUpUserStart = userCredentials => ({
+    type: userTypes.SIGN_UP_USER_START,
+    payload: userCredentials
+})
+
+export const signUpUserError = error => ({
+    type: userTypes.SIGN_UP_USER_ERROR,
+    payload: error
+})
+ export const registerServerError = error => ({
+    type: userTypes.SIGN_UP_SERVER_ERROR,
+    payload: error
+})
+
 
 // ACTIONS CREATORS FOR SERVER ERRORS...
 export const serverSignUpError = error => ({
@@ -77,36 +92,36 @@ export const serverSignUpError = error => ({
 
 
 // SIGN UP ACTION
-export const signUpUser = ({ displayName, email, password, confirmPassword}) => async dispatch => {
-    if(password !== confirmPassword){
-            const err = ["Passwords do not match."]
-            dispatch({
-                type: userTypes.SIGN_UP_FAILED,
-                payload: err
-            })
-            return
-        }
+// export const signUpUser = ({ displayName, email, password, confirmPassword}) => async dispatch => {
+//     if(password !== confirmPassword){
+//             const err = ["Passwords do not match."]
+//             dispatch({
+//                 type: userTypes.SIGN_UP_FAILED,
+//                 payload: err
+//             })
+//             return
+//         }
 
-        try {
+//         try {
             
-            /* Function expects username and password, which is destructured above
-                        destructure user object from the submission*/
-            const {user} = await auth.createUserWithEmailAndPassword(email, password)
-            //Write to the database with the user object, and also passing display name...
-            await handleUserProfile(user, {displayName})
-            dispatch({
-                type: userTypes.SIGN_UP_SUCCESS,
-                payload: true
-            })
+//             /* Function expects username and password, which is destructured above
+//                         destructure user object from the submission*/
+//             const {user} = await auth.createUserWithEmailAndPassword(email, password)
+//             //Write to the database with the user object, and also passing display name...
+//             await handleUserProfile(user, {displayName})
+//             dispatch({
+//                 type: userTypes.SIGN_UP_SUCCESS,
+//                 payload: true
+//             })
 
-        } catch (error) {
-            // console.error(error)
-            dispatch({
-                type: userTypes.SIGN_UP_FAILED_AUTH,
-                payload: error.message
-            })
-        }
-}
+//         } catch (error) {
+//             // console.error(error)
+//             dispatch({
+//                 type: userTypes.SIGN_UP_FAILED_AUTH,
+//                 payload: error.message
+//             })
+//         }
+// }
 
 export const resetPassword = ({ email }) => async dispatch => {
     const config = {
