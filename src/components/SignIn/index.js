@@ -8,16 +8,17 @@ import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 // ACTIONS 
-import { emailSignInStart, signInWithGoogle, resetAllAuthForms } from '../../redux/user/user.actions'
+import { emailSignInStart, signInWithGoogle, resetAllAuthForms, } from '../../redux/user/user.actions'
 
 
 
 const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+    currentUser: user.currentUser,
+    serverSignUpErr: user.serverSignUpErr
 })
 
 const SignIn = (props) => {
-    const { currentUser } = useSelector(mapState)
+    const { currentUser, serverSignUpErr } = useSelector(mapState)
     const dispatch = useDispatch() // just a function that is called
 
     const [email, setEmail] = useState('')
@@ -40,7 +41,8 @@ const SignIn = (props) => {
 
      const handleSubmit = e => {
         e.preventDefault()
-        dispatch(emailSignInStart({ email, password }))
+        dispatch(emailSignInStart({ email, password })) 
+        setError(serverSignUpErr)
     }
 
     const handleGoogleSignIn = () => {

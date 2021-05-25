@@ -1,17 +1,18 @@
 import { userTypes } from './user.types'
 
-const initialState = {
+const INITIAL_STATE = {
     currentUser: null,
+    serverSignUpErr: '',
     // signInSuccess: false,
     // signUpSuccess: false,
     // signInError: '',
     // signUpError: [],
-    // signUpError_auth: '',
+    
     // resetPasswordSuccess: false,
     // resetPasswordError: []
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         // case userTypes.SET_CURRENT_USER: 
         // return {
@@ -70,6 +71,16 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: action.payload
+            }
+        case userTypes.SIGN_OUT_USER_SUCCESS:
+            return {
+                ...state,
+                ...INITIAL_STATE
+            }
+        case userTypes.SIGN_IN_SERVER_ERROR:
+            return {
+                ...state,
+                serverSignUpErr: action.payload
             }
         default:
             return state

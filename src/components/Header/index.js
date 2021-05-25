@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { auth } from '../../firebase/utils'
+// ACTIONS 
+import { signOutUserStart } from '../../redux/user/user.actions'
 
 const StyledHeader = styled.header`
     height: 6.5rem;
@@ -60,7 +61,12 @@ const mapState = ({user}) => ({
     currentUser: user.currentUser
 })
 export default function Header(props){
+    const dispatch = useDispatch()
     const { currentUser } = useSelector(mapState)
+
+    const signOut = () => {
+        dispatch(signOutUserStart())
+    }
 
     return(
         <StyledHeader>
@@ -78,7 +84,7 @@ export default function Header(props){
                                 <Link to="/dashboard">My Account</Link>
                             </li>
                             <li>
-                                <span onClick={() => auth.signOut()} style={{cursor: 'pointer'}}>
+                                <span onClick={() => signOut()} style={{cursor: 'pointer'}}>
                                     LOGOUT
                                 </span>
                             </li>
