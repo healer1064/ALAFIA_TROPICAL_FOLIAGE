@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { ThemeModeProvider } from './styles/theme'
 import { Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import "fontsource-open-sans"
@@ -27,47 +28,49 @@ export default function App(){
   },[])
 
     return (
-      <div className="App">
+      <ThemeModeProvider>
+        <div className="App">
 
-        <Switch>
-            <Route exact path="/" 
-            render={() => (
-              <MainLayout>
-                <Homepage />
-              </MainLayout>
-            )} />
-            <Route exact path="/registration"
-              render={() => (
-              <MainLayout>
-                <Registration />
-              </MainLayout>
-            )} />
-            <Route exact path="/login" 
+          <Switch>
+              <Route exact path="/" 
               render={() => (
                 <MainLayout>
-                  <Login />
+                  <Homepage />
                 </MainLayout>
-            )} />
-            <Route exact path="/recovery" 
-             render={() => (
-               <MainLayout>
-                 <Recovery />
-               </MainLayout>
-             )}
-            />
-            <Route exact path="/dashboard" 
-             render={() => (
-               <WithAuth>
-                 <MainLayout>
-                    <Dashboard />
-                 </MainLayout>
-               </WithAuth>
-               
-             )}
-            />
-        </Switch>
+              )} />
+              <Route exact path="/registration"
+                render={() => (
+                <MainLayout>
+                  <Registration />
+                </MainLayout>
+              )} />
+              <Route exact path="/login" 
+                render={() => (
+                  <MainLayout>
+                    <Login />
+                  </MainLayout>
+              )} />
+              <Route exact path="/recovery" 
+              render={() => (
+                <MainLayout>
+                  <Recovery />
+                </MainLayout>
+              )}
+              />
+              <Route exact path="/dashboard" 
+              render={() => (
+                <WithAuth>
+                  <MainLayout>
+                      <Dashboard />
+                  </MainLayout>
+                </WithAuth>
+                
+              )}
+              />
+          </Switch>
 
-      </div>
+        </div>
+      </ThemeModeProvider>
     )
   
 }

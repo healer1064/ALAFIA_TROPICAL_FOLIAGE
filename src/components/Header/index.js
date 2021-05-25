@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
 import { useSelector, useDispatch } from 'react-redux'
 
 // ACTIONS 
@@ -12,6 +13,7 @@ const StyledHeader = styled.header`
     box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.1);
 
     .wrap {
+        background: ${({ theme }) => theme.background};
         position: relative;
         height: 100%;
         max-width: 1450px;
@@ -34,7 +36,6 @@ const StyledHeader = styled.header`
             ul,li {
                 margin: 0;
                 padding: 0;
-
             }
 
             li {
@@ -47,9 +48,9 @@ const StyledHeader = styled.header`
                 }
 
                 a {
+                    color: ${({ theme }) => theme.primary};
                     font-size: 1.8rem;
                     line-height: 1;
-                    color: black;
                     text-decoration: none;
                     text-transform: uppercase;
                 }

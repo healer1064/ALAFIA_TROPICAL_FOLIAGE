@@ -25,6 +25,7 @@ export const Global = createGlobalStyle`
     }
 
     body {
+        background: ${({ theme }) => theme.background};
         font-family: 'Open Sans', sans-serif;
         font-size: 1.8rem;
         line-height: 1;
@@ -41,6 +42,7 @@ export const Global = createGlobalStyle`
     }
 
     .main {
+        
         width: 100%;
         height: calc(100% - 6.5rem);
         max-width: 100%;

@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
+import { ThemeModeProvider } from './styles/theme'
+
 import { Provider } from 'react-redux'
 import store from './redux/createStore'
 
@@ -12,7 +14,9 @@ ReactDOM.render(
   <Provider store ={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <ThemeModeProvider>
+          <App />
+        </ThemeModeProvider>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,
