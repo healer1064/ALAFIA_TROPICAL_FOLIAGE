@@ -23,7 +23,6 @@ const SignIn = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
 
     useEffect(() => {
         // signInSuccess can change asynchronously, and watch for changes
@@ -42,7 +41,6 @@ const SignIn = (props) => {
      const handleSubmit = e => {
         e.preventDefault()
         dispatch(emailSignInStart({ email, password })) 
-        setError(serverSignUpErr)
     }
 
     const handleGoogleSignIn = () => {
@@ -60,7 +58,7 @@ const SignIn = (props) => {
                     <div className="formWrap">
                         <form onSubmit={handleSubmit}>
 
-                            {error && (<div style={{color: 'red'}}>{error}</div>)}
+                            {serverSignUpErr && (<div style={{color: 'red'}}>{serverSignUpErr}</div>)}
                             
                             <FormInput
                                 type='email' 

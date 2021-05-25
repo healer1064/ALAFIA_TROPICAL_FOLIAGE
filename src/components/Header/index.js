@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/user/user.actions'
 
 const StyledHeader = styled.header`
+   
     height: 6.5rem;
     box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.1);
 
