@@ -60,11 +60,16 @@ const StyledDiv = styled.div`
 `
 
 export default function Directory(props){
+
+    const configVideo = {
+        video: plantShade
+    }
+
     return(
         <StyledDiv>
             <div className="wrapper">
                 <div className="item">
-                    <BackgroundVideo video={plantShade} />
+                    <BackgroundVideo {...configVideo} />
                     <div className="text_container">
                         <h1>Levins Plants</h1>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
