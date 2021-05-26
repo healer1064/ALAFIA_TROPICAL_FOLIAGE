@@ -29,7 +29,6 @@ const SignUp = (props) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState([])
-    // const [authError, setAuthError] = useState('')
 
     useEffect(() => {
         if(currentUser){
@@ -64,9 +63,9 @@ const SignUp = (props) => {
         
     }
         
-        const configAuthWrapper = {
-            headLine: 'Registration'
-        }
+    const configAuthWrapper = {
+        headLine: 'Registration'
+    }
 
 
         return (

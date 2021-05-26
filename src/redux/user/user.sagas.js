@@ -7,22 +7,21 @@ import { signInSuccess, signOutUserSuccess, serverSignUpError, signUpUserError, 
 
 // ...SIGN IN SAGAS (EMAIL AND PASSWORD)...
         export function* getSnapshotFromUserAuth(user, additionalData = {} ){
-    try {
-            const userRef = yield call(handleUserProfile, { userAuth: user, additionalData })
-            const snapshot = yield userRef.get()
-            yield put(
-                signInSuccess({
-                    id: snapshot.id,
-                    ...snapshot.data(),
-                    ...user
-                })
-            )
+            try {
+                    const userRef = yield call(handleUserProfile, { userAuth: user, additionalData })
+                    const snapshot = yield userRef.get()
+                    yield put(
+                        signInSuccess({
+                            id: snapshot.id,
+                            ...snapshot.data(),
+                            ...user
+                        })
+                    )
 
-    } catch (error) {
-        // console.error(error.message)
-    }
+            } catch (error) {
+                // console.error(error.message)
+            }
         }
-
     export function* emailSignIn( { payload: { email, password } } ){
     try {
         const { user } = yield auth.signInWithEmailAndPassword(email, password)
@@ -51,7 +50,6 @@ export function* onEmailSignInStart(){
             // console.error(error.message)
         }
     }
-
 export function* onCheckUserSession(){
     yield takeLatest(userTypes.CHECK_USER_SESSION, isUserAuthenticated)
 }
@@ -73,7 +71,7 @@ export function* onCheckUserSession(){
             yield put(
                 signUpUserError(err)
             )
-            // return
+            return
         }
 
         try {
@@ -82,8 +80,9 @@ export function* onCheckUserSession(){
                         destructure user object from the submission*/
             const { user } = yield auth.createUserWithEmailAndPassword(email, password)
             //Write to the database with the user object, and also passing display name...
-            yield call (handleUserProfile, { userAuth: user, additionalData: { displayName} } )
-
+            // yield call (handleUserProfile, { userAuth: user, additionalData: { displayName} } )
+            const additionalData = { displayName }
+            yield getSnapshotFromUserAuth(user, additionalData)
         } catch (error) {
             yield put(
                 registerServerError(error.message)
@@ -110,7 +109,6 @@ export function* onSignUpUserStart(){
             // console.error(error.message)
         }
     }
-
 export function* onSignOutUserStart(){
     yield takeLatest(userTypes.SIGN_OUT_USER_START, signOutUser)
 }
