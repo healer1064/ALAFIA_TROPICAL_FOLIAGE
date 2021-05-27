@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // ACTION CREATORS
-import { resetPasswordStart } from '../../redux/user/user.actions'
+import { resetPasswordStart, resetUserState } from '../../redux/user/user.actions'
 
 
 // COMPONENTS
@@ -20,6 +20,7 @@ const mapState = ({ user }) => ({
 const EmailPassword = (props) => {
     const { resetPasswordSuccess, resetPasswordError } = useSelector(mapState)
     const dispatch = useDispatch()
+    const history = useHistory()
 
 
     const [email, setEmail] = useState('')
@@ -35,8 +36,8 @@ const EmailPassword = (props) => {
         if(resetPasswordSuccess){
             setMessage('Please check the email asscociated with the account.')
             setTimeout(function(){ 
-                // dispatch(resetAllAuthForms)
-                props.history.push('/login')
+                // dispatch(resetUserState())
+                history.push('/login')
                 window.location.reload()
             },3500)
         }

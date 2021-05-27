@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, useHistory } from 'react-router-dom'
 
 //FORM COMPONENTS
 import AuthWrapper from './../AuthWrapper'
@@ -8,7 +8,7 @@ import FormInput from './../forms/FormInput'
 import Button from './../forms/Button'
 
 // ACTIONS 
-import { emailSignInStart, signInWithGoogle, resetAllAuthForms, } from '../../redux/user/user.actions'
+import { emailSignInStart, googleSignInStart, } from '../../redux/user/user.actions'
 
 
 
@@ -20,6 +20,7 @@ const mapState = ({ user }) => ({
 const SignIn = (props) => {
     const { currentUser, serverSignUpErr } = useSelector(mapState)
     const dispatch = useDispatch() // just a function that is called
+    const history = useHistory()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -28,7 +29,7 @@ const SignIn = (props) => {
         // signInSuccess can change asynchronously, and watch for changes
         if (currentUser){
             resetForm()
-            props.history.push('/')
+            history.push('/')
         }
     },[currentUser]) // keep it as a dependency
 
@@ -44,7 +45,7 @@ const SignIn = (props) => {
     }
 
     const handleGoogleSignIn = () => {
-        dispatch(signInWithGoogle())
+        dispatch(googleSignInStart())
     }
 
     

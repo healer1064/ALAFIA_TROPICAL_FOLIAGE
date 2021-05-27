@@ -1,7 +1,7 @@
-import { takeLatest, call, all, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, call, all, put } from 'redux-saga/effects'
 import { userTypes } from './user.types'
 
-import {  auth, handleUserProfile, getCurrentUser } from '../../firebase/utils'
+import {  auth, handleUserProfile, getCurrentUser, GoogleProvider } from '../../firebase/utils'
 
 // ACTIONS 
 import { signInSuccess, signOutUserSuccess, serverSignUpError, signUpUserError, registerServerError, resetPasswordSuccess, resetPasswordError } from './user.actions'
@@ -122,22 +122,7 @@ export function* onSignOutUserStart(){
 // --- RESET PASSWORD SAGAS --- 
     export function* resetPassword({ payload: { email } }){
        
-        
             try {
-                // await auth.sendPasswordResetEmail(email, config)
-                // .then(() => {
-                //     dispatch({
-                //         type: userTypes.RESET_PASSWORD_SUCCESS,
-                //         payload: true
-                //     })
-                // })
-                // .catch(() => {
-                //     const err = ['Email not found. Please try again.']
-                //     dispatch({
-                //         type: userTypes.RESET_PASSWORD_FAILED,
-                //         payload: err
-                //     })
-                // })
                 yield call(handleResetPasswordAPI, email)
                 yield put(
                     resetPasswordSuccess()
@@ -154,6 +139,19 @@ export function* onResetPasswordStart(){
     yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword)
 }
 
+// --- GOOGLE SIGN IN SAGAS ----
+    export function* googleSignIn(){
+        try {
+            const { user } = yield auth.signInWithPopup(GoogleProvider)
+            yield getSnapshotFromUserAuth(user)
+        } catch (error) {
+            // console.log(error.message)
+        }
+    }
+export function* onGoogleSignInStart(){
+    yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn)
+}
+
 
 
 
@@ -167,5 +165,6 @@ export default function* userSagas(){
         call(onSignOutUserStart),
         call(onCheckUserSession),
         call(onResetPasswordStart),
+        call(onGoogleSignInStart)
     ])
 }
