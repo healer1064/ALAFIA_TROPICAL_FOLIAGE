@@ -19,6 +19,7 @@ import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
+import Admin from './pages/Admin'
 
 export default function App(){
   const dispatch = useDispatch()
@@ -64,9 +65,18 @@ export default function App(){
                       <Dashboard />
                   </MainLayout>
                 </WithAuth>
-                
               )}
               />
+
+            <Route exact path="/admin" 
+              render={() => (
+                <MainLayout>
+                  <Admin />
+                </MainLayout>
+              )}
+              />
+
+
           </Switch>
 
         </div>
