@@ -3,7 +3,11 @@ import { userTypes } from './user.types'
 
 import {  auth, handleUserProfile, getCurrentUser } from '../../firebase/utils'
 
-import { signInSuccess, signOutUserSuccess, serverSignUpError, signUpUserError, registerServerError } from './user.actions'
+// ACTIONS 
+import { signInSuccess, signOutUserSuccess, serverSignUpError, signUpUserError, registerServerError, resetPasswordSuccess, resetPasswordError } from './user.actions'
+
+// HELPERS
+import { handleResetPasswordAPI } from './user.helpers'
 
 // ...SIGN IN SAGAS (EMAIL AND PASSWORD)...
         export function* getSnapshotFromUserAuth(user, additionalData = {} ){
@@ -38,8 +42,9 @@ export function* onEmailSignInStart(){
 
 
 
-
-
+// ... USER SESSION CHECK SAGAS...
+// ... checks on render and persist state of currentUser across rehydrations...
+// --- EDGE CASE: Slight delay in header update, might need a preloader. Probably not the best way to solve this.
     export function* isUserAuthenticated(){
         try {
             const userAuth = yield getCurrentUser()
@@ -114,7 +119,40 @@ export function* onSignOutUserStart(){
 }
 
 
-
+// --- RESET PASSWORD SAGAS --- 
+    export function* resetPassword({ payload: { email } }){
+       
+        
+            try {
+                // await auth.sendPasswordResetEmail(email, config)
+                // .then(() => {
+                //     dispatch({
+                //         type: userTypes.RESET_PASSWORD_SUCCESS,
+                //         payload: true
+                //     })
+                // })
+                // .catch(() => {
+                //     const err = ['Email not found. Please try again.']
+                //     dispatch({
+                //         type: userTypes.RESET_PASSWORD_FAILED,
+                //         payload: err
+                //     })
+                // })
+                yield call(handleResetPasswordAPI, email)
+                yield put(
+                    resetPasswordSuccess()
+                )
+    
+            } catch(error) {
+                // console.error(error)
+                yield put(
+                    resetPasswordError(error)
+                )
+            }
+    }
+export function* onResetPasswordStart(){
+    yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword)
+}
 
 
 
@@ -128,5 +166,6 @@ export default function* userSagas(){
         call(onSignUpUserStart), 
         call(onSignOutUserStart),
         call(onCheckUserSession),
+        call(onResetPasswordStart),
     ])
 }

@@ -54,6 +54,11 @@ const StyledHeader = styled.header`
                     text-decoration: none;
                     text-transform: uppercase;
                 }
+
+                .span {
+                    color: ${({ theme }) => theme.primary};
+                }
+
             }
         }
 

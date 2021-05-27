@@ -53,6 +53,22 @@ export const serverSignUpError = error => ({
     payload: error
 })
 
+// RESET PASSWORD ACTIONS ...
+export const resetPasswordStart = userCredentials => ({
+    type: userTypes.RESET_PASSWORD_START,
+    payload: userCredentials
+})
+
+export const resetPasswordSuccess = () => ({
+    type: userTypes.RESET_PASSWORD_SUCCESS,
+    payload: true
+})
+
+export const resetPasswordError = error => ({
+    type: userTypes.RESET_PASSWORD_ERROR,
+    payload: error
+})
+
 
 // export const signOutUserStart = () => ({
 //     type: userTypes.SIGN_OUT_USER_START
@@ -123,31 +139,31 @@ export const serverSignUpError = error => ({
 //         }
 // }
 
-export const resetPassword = ({ email }) => async dispatch => {
-    const config = {
-        url: 'http://localhost:3000/login'//Change this for production
-    }
+// export const resetPassword = ({ email }) => async dispatch => {
+//     const config = {
+//         url: 'http://localhost:3000/login'//Change this for production
+//     }
     
-        try {
-            await auth.sendPasswordResetEmail(email, config)
-            .then(() => {
-                dispatch({
-                    type: userTypes.RESET_PASSWORD_SUCCESS,
-                    payload: true
-                })
-            })
-            .catch(() => {
-                const err = ['Email not found. Please try again.']
-                dispatch({
-                    type: userTypes.RESET_PASSWORD_FAILED,
-                    payload: err
-                })
-            })
+//         try {
+//             await auth.sendPasswordResetEmail(email, config)
+//             .then(() => {
+//                 dispatch({
+//                     type: userTypes.RESET_PASSWORD_SUCCESS,
+//                     payload: true
+//                 })
+//             })
+//             .catch(() => {
+//                 const err = ['Email not found. Please try again.']
+//                 dispatch({
+//                     type: userTypes.RESET_PASSWORD_FAILED,
+//                     payload: err
+//                 })
+//             })
 
-        } catch(error) {
-            // console.error(error)
-        }
-}
+//         } catch(error) {
+//             // console.error(error)
+//         }
+// }
 
 export const signInWithGoogle = () => async dispatch => {
     try {

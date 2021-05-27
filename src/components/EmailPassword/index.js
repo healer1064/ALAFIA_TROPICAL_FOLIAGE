@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // ACTION CREATORS
-import { resetAllAuthForms, resetPassword } from '../../redux/user/user.actions'
+import { resetPasswordStart } from '../../redux/user/user.actions'
 
 
 // COMPONENTS
@@ -14,7 +14,7 @@ import Button from './../forms/Button'
 
 const mapState = ({ user }) => ({
     resetPasswordSuccess: user.resetPasswordSuccess,
-    resetPasswordError: user.resetPasswordError
+    resetPasswordError: user.resetPasswordError,
 })
 
 const EmailPassword = (props) => {
@@ -35,7 +35,7 @@ const EmailPassword = (props) => {
         if(resetPasswordSuccess){
             setMessage('Please check the email asscociated with the account.')
             setTimeout(function(){ 
-                dispatch(resetAllAuthForms)
+                // dispatch(resetAllAuthForms)
                 props.history.push('/login')
                 window.location.reload()
             },3500)
@@ -48,9 +48,9 @@ const EmailPassword = (props) => {
         }
     },[resetPasswordError])
     
-    const handleSubmit = async (e) => {
+    const handleSubmit = e => {
         e.preventDefault()
-        dispatch(resetPassword({ email }))
+        dispatch(resetPasswordStart({ email }))
         resetForm()
     }
  
@@ -70,7 +70,7 @@ const EmailPassword = (props) => {
                             })}
                         </ul>
                     )}
-                    {message && <div style={{color: 'green'}}>{message}</div>}
+                    { message && <div style={{color: 'green'}}>{ message }</div>}
                     <form onSubmit={handleSubmit}>
                         <FormInput 
                             type="email"
