@@ -3,14 +3,14 @@ import { ThemeProvider } from 'styled-components'
 
 const darkTheme = {
     isDark: true,
-    background: '#212F3C',
+    background: '#12191F',
     primary: 'lightblue',
     secondary: 'pink',
   }
   const lightTheme = {
     isDark: false,
-    background: 'white',
-    primary: 'royalblue',
+    background: '#FFF',
+    primary: '#000',
     secondary: 'palevioletred',
   }
 

@@ -10,7 +10,22 @@ import Button from './../forms/Button'
 // ACTIONS 
 import { emailSignInStart, googleSignInStart, } from '../../redux/user/user.actions'
 
-
+const style = {
+    display: 'block !important',
+    width: '100% !important',
+    padding: '1rem 7rem !important',
+    margin: '0 auto !important',
+    background: 'black !important',
+    color: 'white !important',
+    fontSize: '2rem !important',
+    lineHeight: ' 1 !important',
+    fontWeight: '300 !important',
+    textTransform: 'uppercase !important',
+    outline: 'none !important',
+    border: '0 !important',
+    borderRadius: '34px !important',
+    cursor: 'pointer !important',
+}
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser,
@@ -79,8 +94,9 @@ const SignIn = (props) => {
 
                             <div className="socialSignIn">
                                 <div className="row">
-                                    <Button onClick={handleGoogleSignIn}>
-                                        Sign in with Google
+                                    <Button onClick={handleGoogleSignIn}
+                                    >
+                                        Log in with Google
                                     </Button>
                                 </div>
                             </div>

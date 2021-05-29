@@ -96,13 +96,13 @@ export default function Admin(){
 
                         <FormSelect
                             label="Category"
-                            options={[{
-                                value: "mens",
-                                name: "Mens"
-                            }, {
-                                value: "womens",
-                                name: "Womens"
-                            }]}
+                            // options={[{
+                            //     value: "mens",
+                            //     name: "Mens"
+                            // }, {
+                            //     value: "womens",
+                            //     name: "Womens"
+                            // }]}
                         handleChange={e => setProductCategory(e.target.value)}
                         />
 

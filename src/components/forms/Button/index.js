@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StyledButton = styled.button`
     display: block;
     width: 100%;
-    padding: .7rem 7rem;
+    padding: 1rem 7rem;
     margin: 0 auto;
     background: black;
     color: white;
@@ -14,6 +14,7 @@ const StyledButton = styled.button`
     text-transform: uppercase;
     outline: none;
     border: 0;
+    border-radius: 34px;
     cursor: pointer;
 `
 

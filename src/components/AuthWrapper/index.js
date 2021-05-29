@@ -5,11 +5,12 @@ const StyledAuth = styled.div`
         display: block;
         width: 100%;
         max-width: 40.0rem;
-        border: 1px solid black;
+        
+        box-shadow: 0rem 0.225rem 0.475rem 0.164rem rgba(0, 0, 0, 0.12);
         margin: 4rem auto 6rem;
 
         .wrap {
-            padding: 10px;
+            padding: 20px;
 
             h2 {
                 font-size: 2.2rem;

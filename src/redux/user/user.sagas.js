@@ -32,7 +32,9 @@ import { handleResetPasswordAPI } from './user.helpers'
         yield getSnapshotFromUserAuth(user)
         
      } catch (error) {
-          yield put (serverSignUpError(error.message)) // catch server thrown errors...
+         const ERROR = error.message
+          yield put (serverSignUpError(ERROR)) // catch server thrown errors...
+          
     }
     }   
    // TakeLatest effect expects a Redux action type, and payload when invoked. Generator function is then called and will intercept this async function...
