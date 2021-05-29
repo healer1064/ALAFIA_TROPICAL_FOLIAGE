@@ -16,6 +16,8 @@ import { checkUserSession } from './redux/user/user.actions'
 
 // LAYOUTS
 import MainLayout from './Layouts/Mainlayout'
+import AdminLayout from './Layouts/AdminLayout'
+import DashboardLayout from './Layouts/DashboardLayout'
 
 // PAGES
 import Homepage from './pages/Homepage'
@@ -66,9 +68,9 @@ export default function App(){
               <Route exact path="/dashboard" 
               render={() => (
                 <WithAuth>
-                  <MainLayout>
+                  <DashboardLayout>
                       <Dashboard />
-                  </MainLayout>
+                  </DashboardLayout>
                 </WithAuth>
               )}
               />
@@ -76,9 +78,9 @@ export default function App(){
             <Route exact path="/admin" 
               render={() => (
                 <WithAdminAuth>
-                  <MainLayout>
+                  <AdminLayout>
                     <Admin />
-                  </MainLayout>
+                  </AdminLayout>
                 </WithAdminAuth>
               )}
               />

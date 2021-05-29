@@ -45,6 +45,10 @@ const StyledDiv = styled.div`
                 display: flex;
                 flex-direction: column;
                 
+                h1 {
+                    color: #fff;
+                }
+                
                 a {
                     text-transform: capitalize;
                     color: #fff;
@@ -71,7 +75,7 @@ export default function Directory(props){
                 <div className="item">
                     <BackgroundVideo {...configVideo} />
                     <div className="text_container">
-                        <h1>Levins Plants</h1>
+                        <h1>Alafia Tropical Foliage</h1>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
                         <a href="/">find plants</a>
                     </div>
