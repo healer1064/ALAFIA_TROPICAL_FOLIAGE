@@ -4,8 +4,12 @@ import { Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import "fontsource-open-sans"
 
+// COMPONENTS
+import AdminToolBar from './components/AdminToolBar'
+
 //HIGHER ORDER COMPONENTS
 import WithAuth from './hoc/withAuth'
+import WithAdminAuth from './hoc/withAdminAuth'
 
 // ACTION CREATORS
 import { checkUserSession } from './redux/user/user.actions'
@@ -31,8 +35,9 @@ export default function App(){
     return (
       <ThemeModeProvider>
         <div className="App">
-
+          <AdminToolBar />
           <Switch>
+
               <Route exact path="/" 
               render={() => (
                 <MainLayout>
@@ -70,12 +75,13 @@ export default function App(){
 
             <Route exact path="/admin" 
               render={() => (
-                <MainLayout>
-                  <Admin />
-                </MainLayout>
+                <WithAdminAuth>
+                  <MainLayout>
+                    <Admin />
+                  </MainLayout>
+                </WithAdminAuth>
               )}
               />
-
 
           </Switch>
 
