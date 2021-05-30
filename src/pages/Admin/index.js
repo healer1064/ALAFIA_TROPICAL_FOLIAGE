@@ -67,7 +67,7 @@ export default function Admin(){
     const { plantsData } = useSelector(mapState)
 
     const [hideModal, setHideModal] = useState(true)
-    // const [productCategory, setProductCategory] = useState('')
+    
     const [plantName, setPlantName] = useState('')
     const [plantThumbnail, setPlantThumbnail] = useState('')
     const [plantPrice, setPlantPrice] = useState(0)
@@ -80,10 +80,6 @@ export default function Admin(){
     };
 
     useEffect(() => {
-        // firestore.collection('products').get().then(snapshot => {
-        // const snapshotData = snapshot.docs.map(doc => doc.data())
-        // setProducts(snapshotData);
-        // })
         dispatch(fetchPlantsStart())
     }, [])
 
@@ -103,14 +99,6 @@ export default function Admin(){
             plantPrice
         }))
         resetForm()
-        // firestore.collection('products').doc().set({
-        //   productCategory,
-        //   productName,
-        //   productThumbnail,
-        //   productPrice
-        // }).then(e => {
-        //   // Success
-        // })
       }
 
 
