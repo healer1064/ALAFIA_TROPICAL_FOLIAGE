@@ -2,7 +2,11 @@ import { auth } from './../../firebase/utils'
 import { takeLatest, put, all, call } from 'redux-saga/effects'
 import { plantsTypes } from './plants.types'
 
-import { handleAddPlant } from './plants.helpers'
+// ACTION CREATORS
+import { setPlants } from './plants.actions'
+
+// HELPERS 
+import { handleAddPlant, handleFetchPlants } from './plants.helpers'
 
 
     export function* addPlant({ payload: { 
@@ -32,10 +36,29 @@ export function* onAddPlantStart(){
 
 
 
+    export function* fetchPlants(){
+        try {
+            const plants = yield handleFetchPlants()
+            yield put(
+                setPlants(plants)
+            )
+            
+        } catch (error) {
+            // console.error(error.message)
+        }
+    }
+
+export function* onFetchPlantsStart(){
+    yield takeLatest(plantsTypes.FETCH_PLANTS_START, fetchPlants)
+}
+
+
+
 
 
 export default function* plantsSagas(){
     yield all([
-        call(onAddPlantStart)
+        call(onAddPlantStart),
+        call(onFetchPlantsStart)
     ])
 }

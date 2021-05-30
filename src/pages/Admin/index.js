@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { useDispatch } from 'react-redux'
 
-import { addPlantStart } from '../../redux/plants/plants.actions'
+import { addPlantStart, fetchPlantsStart } from '../../redux/plants/plants.actions'
 
 import { firestore } from './../../firebase/utils'
 import Modal from './../../components/Modal'
@@ -35,16 +35,36 @@ const StyledDiv = styled.div`
         }
 
     }
+
+    .managePlants {
+        h1 {
+            margin-top: 1.5rem;
+        }
+
+        table {
+            tr {
+                &:nth-child(even) {
+                    background-color: #d3d3d3;
+                }
+            }
+
+            .thumbnail {
+                width: 15.0rem;
+                margin: 0 auto;
+            }
+        }
+    }
+
+
 `
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+const mapState = ({ plants }) => ({
+    plantsData: plants.plantsData
 })
 
 export default function Admin(){
-    const { currentUser } = useSelector(mapState)
-
     const dispatch = useDispatch()
+    const { plantsData } = useSelector(mapState)
 
     const [plants, setPlants] = useState([])
     const [hideModal, setHideModal] = useState(true)
@@ -60,12 +80,14 @@ export default function Admin(){
         toggleModal
     };
 
-    // useEffect(() => {
-    //     firestore.collection('products').get().then(snapshot => {
-    //     const snapshotData = snapshot.docs.map(doc => doc.data())
-    //     setProducts(snapshotData);
-    //     })
-    // }, [])
+    useEffect(() => {
+        // firestore.collection('products').get().then(snapshot => {
+        // const snapshotData = snapshot.docs.map(doc => doc.data())
+        // setProducts(snapshotData);
+        // })
+
+        dispatch(fetchPlantsStart())
+    }, [])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -91,13 +113,13 @@ export default function Admin(){
 
     return (
         <StyledDiv>
-                <div className="callToActions">
+            <div className="callToActions">
                 <ul>
-                <li>
-                    <Button onClick={() => toggleModal()}>
-                    Add new product
-                    </Button>
-                </li>
+                    <li>
+                        <Button onClick={() => toggleModal()}>
+                        Add new product
+                        </Button>
+                    </li>
                 </ul>
             </div>
 
@@ -150,6 +172,54 @@ export default function Admin(){
                     </form>
                 </div>
             </Modal>
+
+            <div className="managePlants">
+
+                <table border='0' cellPadding='0' cellSpacing='0'>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <h1>Manage Plants</h1>
+                            </th>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <table border='0' cellPadding='10' cellSpacing='0'>
+                                    <tbody>
+                                        {plantsData.map((plant, index) => {
+                                            const { 
+                                                plantName, 
+                                                plantThumbnail, 
+                                                plantPrice
+                                            } = plant
+
+                                            return (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <img 
+                                                            className="thumbnail"
+                                                            src={plantThumbnail}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        {plantName}
+                                                    </td>
+                                                    <td>
+                                                        ${plantPrice}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
         </StyledDiv>    
     )
 }
