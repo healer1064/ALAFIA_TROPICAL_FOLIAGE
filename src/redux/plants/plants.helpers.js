@@ -34,3 +34,18 @@ export const handleFetchPlants = () => {
         })
     })
 }
+
+export const handleDeletePlant = documentId => {
+    return new Promise(( resolve, reject) => {
+        firestore
+        .collection('plants')
+        .doc(documentId)
+        .delete()
+        .then(() => {
+            resolve()
+        })
+        .catch(error => {
+            reject(error.message)
+        })
+    })  
+}

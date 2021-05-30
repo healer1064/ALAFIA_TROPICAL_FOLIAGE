@@ -13,3 +13,7 @@ export const setPlants = plants => ({
     type: plantsTypes.SET_PLANTS,
     payload: plants
 })
+export const deletePlantStart = id => ({
+    type: plantsTypes.DELETE_PLANT_START,
+    payload: id
+})

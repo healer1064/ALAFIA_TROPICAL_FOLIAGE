@@ -6,7 +6,7 @@ import { plantsTypes } from './plants.types'
 import { setPlants, fetchPlantsStart } from './plants.actions'
 
 // HELPERS 
-import { handleAddPlant, handleFetchPlants } from './plants.helpers'
+import { handleAddPlant, handleFetchPlants, handleDeletePlant } from './plants.helpers'
 
 
     export function* addPlant({ payload: { 
@@ -40,6 +40,8 @@ export function* onAddPlantStart(){
 
 
 
+
+
     export function* fetchPlants(){
         try {
             const plants = yield handleFetchPlants()
@@ -59,10 +61,29 @@ export function* onFetchPlantsStart(){
 
 
 
+    export function* deletePlant({ payload }){
+        try {
+            yield handleDeletePlant(payload)
+            yield put (
+                fetchPlantsStart()
+            )
+        } catch (error) {
+            // console.error(error.message)
+        }
+    }
+export function* onDeletePlantStart(){
+    yield takeLatest(plantsTypes.DELETE_PLANT_START, deletePlant)
+}
+
+
+
+
+
 
 export default function* plantsSagas(){
     yield all([
         call(onAddPlantStart),
-        call(onFetchPlantsStart)
+        call(onFetchPlantsStart),
+        call(onDeletePlantStart)
     ])
 }

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { useDispatch } from 'react-redux'
 
-import { addPlantStart, fetchPlantsStart } from '../../redux/plants/plants.actions'
+import { addPlantStart, fetchPlantsStart, deletePlantStart } from '../../redux/plants/plants.actions'
 
 import { firestore } from './../../firebase/utils'
 import Modal from './../../components/Modal'
@@ -194,7 +194,8 @@ export default function Admin(){
                                             const { 
                                                 plantName, 
                                                 plantThumbnail, 
-                                                plantPrice
+                                                plantPrice,
+                                                documentId
                                             } = plant
 
                                             return (
@@ -210,6 +211,13 @@ export default function Admin(){
                                                     </td>
                                                     <td>
                                                         ${plantPrice}
+                                                    </td>
+                                                    <td>
+                                                        <Button 
+                                                            onClick={() => dispatch(deletePlantStart(documentId)) }
+                                                        >
+                                                            Delete
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                             )
