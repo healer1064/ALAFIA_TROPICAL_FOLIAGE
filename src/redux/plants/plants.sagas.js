@@ -3,7 +3,7 @@ import { takeLatest, put, all, call } from 'redux-saga/effects'
 import { plantsTypes } from './plants.types'
 
 // ACTION CREATORS
-import { setPlants } from './plants.actions'
+import { setPlants, fetchPlantsStart } from './plants.actions'
 
 // HELPERS 
 import { handleAddPlant, handleFetchPlants } from './plants.helpers'
@@ -25,6 +25,10 @@ import { handleAddPlant, handleFetchPlants } from './plants.helpers'
                 AdminUserName: auth.currentUser.displayName,
                 createdDate: timestamp
             })
+
+            yield put(
+                fetchPlantsStart()
+            )
         } catch (error) {
             // console.error(error.message)
         }

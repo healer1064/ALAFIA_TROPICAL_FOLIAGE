@@ -41,7 +41,7 @@ const StyledDiv = styled.div`
             margin-top: 1.5rem;
         }
 
-        table {
+        table.results {
             tr {
                 &:nth-child(even) {
                     background-color: #d3d3d3;
@@ -66,7 +66,6 @@ export default function Admin(){
     const dispatch = useDispatch()
     const { plantsData } = useSelector(mapState)
 
-    const [plants, setPlants] = useState([])
     const [hideModal, setHideModal] = useState(true)
     // const [productCategory, setProductCategory] = useState('')
     const [plantName, setPlantName] = useState('')
@@ -85,20 +84,25 @@ export default function Admin(){
         // const snapshotData = snapshot.docs.map(doc => doc.data())
         // setProducts(snapshotData);
         // })
-
         dispatch(fetchPlantsStart())
     }, [])
+
+    const resetForm = () => {
+        setHideModal(true)
+        setPlantName('') 
+        setPlantThumbnail('') 
+        setPlantPrice(0)
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
 
         dispatch(addPlantStart({ 
-            // productCategory, 
             plantName, 
             plantThumbnail, 
             plantPrice
         }))
-    
+        resetForm()
         // firestore.collection('products').doc().set({
         //   productCategory,
         //   productName,
@@ -107,7 +111,6 @@ export default function Admin(){
         // }).then(e => {
         //   // Success
         // })
-    
       }
 
 
@@ -185,7 +188,7 @@ export default function Admin(){
                         <tr>
 
                             <td>
-                                <table border='0' cellPadding='10' cellSpacing='0'>
+                                <table className="results" border='0' cellPadding='10' cellSpacing='0'>
                                     <tbody>
                                         {plantsData.map((plant, index) => {
                                             const { 
