@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 
@@ -10,22 +11,22 @@ import Button from './../forms/Button'
 // ACTIONS 
 import { emailSignInStart, googleSignInStart, } from '../../redux/user/user.actions'
 
-const style = {
-    display: 'block !important',
-    width: '100% !important',
-    padding: '1rem 7rem !important',
-    margin: '0 auto !important',
-    background: 'black !important',
-    color: 'white !important',
-    fontSize: '2rem !important',
-    lineHeight: ' 1 !important',
-    fontWeight: '300 !important',
-    textTransform: 'uppercase !important',
-    outline: 'none !important',
-    border: '0 !important',
-    borderRadius: '34px !important',
-    cursor: 'pointer !important',
-}
+const StyledButton = styled.button`
+    display: block;
+    width: 100%;
+    padding: 1rem 7rem;
+    margin: 0 auto;
+    background: #4285F4;
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 300;
+    text-transform: uppercase;
+    outline: none;
+    border: 0;
+    border-radius: 34px;
+    cursor: pointer;
+`
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser,
@@ -94,15 +95,17 @@ const SignIn = (props) => {
 
                             <div className="socialSignIn">
                                 <div className="row">
-                                    <Button onClick={handleGoogleSignIn}
+                                    <StyledButton onClick={handleGoogleSignIn}
                                     >
-                                        Log in with Google
-                                    </Button>
+                                        Login with Google
+                                    </StyledButton>
                                 </div>
                             </div>
 
                             <div className="links">
-                                <Link to='/recovery'>Reset Password</Link>
+                                <Link to='/recovery' style={{textDecoration: 'underline'}}>
+                                    Forgot password?
+                                </Link>
                             </div>
 
                         </form>

@@ -11,6 +11,8 @@ const StyledDiv = styled.div`
     }
 
     .modal {
+        z-index: 10;
+        box-shadow: 0rem 0.225rem 0.475rem 0.164rem rgba(0, 0, 0, 0.12);
         position: absolute;
         top: 50%; left: 50%;
         -webkit-transform: translate(-50%, -50%);

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 
+import { useDispatch } from 'react-redux'
+
+import { addPlantStart } from '../../redux/plants/plants.actions'
+
 import { firestore } from './../../firebase/utils'
 import Modal from './../../components/Modal'
 import FormInput from './../../components/forms/FormInput'
@@ -40,6 +44,8 @@ const mapState = ({ user }) => ({
 export default function Admin(){
     const { currentUser } = useSelector(mapState)
 
+    const dispatch = useDispatch()
+
     const [products, setProducts] = useState([])
     const [hideModal, setHideModal] = useState(true)
     const [productCategory, setProductCategory] = useState('')
@@ -54,24 +60,30 @@ export default function Admin(){
         toggleModal
     };
 
-    useEffect(() => {
-        firestore.collection('products').get().then(snapshot => {
-        const snapshotData = snapshot.docs.map(doc => doc.data())
-        setProducts(snapshotData);
-        })
-    }, [])
+    // useEffect(() => {
+    //     firestore.collection('products').get().then(snapshot => {
+    //     const snapshotData = snapshot.docs.map(doc => doc.data())
+    //     setProducts(snapshotData);
+    //     })
+    // }, [])
 
     const handleSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
+
+        dispatch(addPlantStart({ 
+            // productCategory, 
+            productName, 
+            
+        }))
     
-        firestore.collection('products').doc().set({
-          productCategory,
-          productName,
-          productThumbnail,
-          productPrice
-        }).then(e => {
-          // Success
-        })
+        // firestore.collection('products').doc().set({
+        //   productCategory,
+        //   productName,
+        //   productThumbnail,
+        //   productPrice
+        // }).then(e => {
+        //   // Success
+        // })
     
       }
 
