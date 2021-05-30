@@ -1,3 +1,5 @@
 export const plantsTypes = {
     ADD_NEW_PLANT_START: 'ADD_NEW_PLANT_START',
+    FETCH_PLANTS_START: 'FETCH_PLANTS_START',
+    SET_PLANTS: 'SET_PLANTS',
 }
