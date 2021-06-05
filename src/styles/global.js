@@ -30,6 +30,7 @@ export const Global = createGlobalStyle`
         font-size: 1.8rem;
         line-height: 1;
         font-weight: 400;
+        
     }
 
     h1 {

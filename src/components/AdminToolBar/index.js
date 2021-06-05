@@ -8,7 +8,7 @@ import { checkUserisAdmin } from '../../utils'
 const StyledDiv = styled.div`
     display: inline-block;
     width: 100%;
-    background-color: #000;
+    background-color: #212F3C;
     height: auto;
     margin: 0 auto;
     padding: 0 10px;

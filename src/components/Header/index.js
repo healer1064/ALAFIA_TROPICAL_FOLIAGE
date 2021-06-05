@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/user/user.actions'
 
 const StyledHeader = styled.header`
-   
+    transition: .2s ease-in-out;
     height: 6.5rem;
     box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.1);
 
@@ -18,6 +18,7 @@ const StyledHeader = styled.header`
         height: 100%;
         max-width: 1450px;
         margin: 0 auto;
+        
 
         .logo {
             width: 13.0px;
@@ -55,8 +56,10 @@ const StyledHeader = styled.header`
                     text-transform: uppercase;
                 }
 
-                .span {
+                span {
                     color: ${({ theme }) => theme.primary};
+                    cursor: pointer;
+                    transition: all .4s ease-in-out;
                 }
 
             }
@@ -91,7 +94,7 @@ export default function Header(props){
                                 <Link to="/dashboard">My Account</Link>
                             </li>
                             <li>
-                                <span onClick={() => signOut()} style={{cursor: 'pointer'}}>
+                                <span onClick={() => signOut()}>
                                     LOGOUT
                                 </span>
                             </li>

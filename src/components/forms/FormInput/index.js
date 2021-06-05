@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 const StyledInput = styled.div`
 
+    label {
+        margin-left: 1rem;
+        font-size: 1.2rem;
+        color: #4F616D;
+    }
+
     input {
         display: block;
         width: 100%;
@@ -12,7 +18,8 @@ const StyledInput = styled.div`
         text-align: left;
         padding: 10px 5px;
         margin: 10px auto; 
-        border: 1px solid #9e9e9e;
+        border: 1px solid #D6DEE0;
+        border-radius: 14px;
         outline: none;
     }
 

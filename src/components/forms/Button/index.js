@@ -6,15 +6,15 @@ const StyledButton = styled.button`
     width: 100%;
     padding: 1rem 7rem;
     margin: 0 auto;
-    background: black;
+    background: #212F3C;
     color: white;
     font-size: 2rem;
     line-height: 1;
     font-weight: 300;
-    text-transform: uppercase;
+    text-transform: capitalize;
     outline: none;
     border: 0;
-    border-radius: 34px;
+    border-radius: 14px;
     cursor: pointer;
 `
 

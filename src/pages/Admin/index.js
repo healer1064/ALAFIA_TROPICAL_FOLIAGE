@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-
 import { useDispatch } from 'react-redux'
 
 import { addPlantStart, fetchPlantsStart, deletePlantStart } from '../../redux/plants/plants.actions'
 
-import { firestore } from './../../firebase/utils'
 import Modal from './../../components/Modal'
 import FormInput from './../../components/forms/FormInput'
 import FormSelect from './../../components/forms/FormSelect'
 import Button from './../../components/forms/Button'
+import ListItem from './../../components/ListItem'
 
 const StyledDiv = styled.div`
     padding: 0 10px;
@@ -105,10 +104,11 @@ export default function Admin(){
     return (
         <StyledDiv>
             <div className="callToActions">
+                
                 <ul>
                     <li>
                         <Button onClick={() => toggleModal()}>
-                        Add new product
+                            Add new product
                         </Button>
                     </li>
                 </ul>
@@ -119,18 +119,6 @@ export default function Admin(){
                     <form onSubmit={handleSubmit}>
 
                         <h2>Add new product</h2>
-
-                        {/* <FormSelect
-                            label="Category"
-                            options={[{
-                                value: "mens",
-                                name: "Mens"
-                            }, {
-                                value: "womens",
-                                name: "Womens"
-                            }]}
-                        handleChange={e => setProductCategory(e.target.value)}
-                        /> */}
 
                         <FormInput
                             label="Name"
@@ -166,7 +154,7 @@ export default function Admin(){
 
             <div className="managePlants">
 
-                <table border='0' cellPadding='0' cellSpacing='0'>
+                {/* <table border='0' cellPadding='0' cellSpacing='0'>
                     <tbody>
                         <tr>
                             <th>
@@ -206,6 +194,7 @@ export default function Admin(){
                                                         >
                                                             Delete
                                                         </Button>
+                                                        <DeleteButton handleClick={() => dispatch(deletePlantStart(documentId)) }/>
                                                     </td>
                                                 </tr>
                                             )
@@ -215,7 +204,25 @@ export default function Admin(){
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> */}
+
+                {plantsData && plantsData.map((plant, index) => {
+                    const { 
+                        plantName, 
+                        plantThumbnail, 
+                        plantPrice,
+                        documentId
+                    } = plant
+                    return (
+                         <ListItem 
+                            key={index} 
+                            name={plantName} 
+                            picture={plantThumbnail} 
+                            price={plantPrice} 
+                            handleClick={() => dispatch(deletePlantStart(documentId))} 
+                        />
+                    )
+                })}
 
             </div>
 

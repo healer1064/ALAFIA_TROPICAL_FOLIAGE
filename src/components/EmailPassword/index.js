@@ -66,7 +66,7 @@ const EmailPassword = (props) => {
                         <ul>
                             {errors.map((e, index) => {
                                 return (
-                                    <li key={index}>{e}</li>
+                                    <li style={{listStyle: 'none', color: 'red'}}key={index}>{e}</li>
                                 )
                             })}
                         </ul>
@@ -77,7 +77,7 @@ const EmailPassword = (props) => {
                             type="email"
                             name="email"
                             value={email}
-                            placeholder="Email"
+                            // placeholder="Email"
                             handleChange={e => setEmail(e.target.value)}
                         />
                         <Button type="submit">Email Password</Button>

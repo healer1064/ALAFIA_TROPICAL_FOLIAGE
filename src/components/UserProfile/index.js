@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { ThemeModeContext } from '../../styles/theme'
 // import userIMG from './../../assets/user.png'
 
 const StyledDiv = styled.div`
     display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     margin: 3rem auto 1rem;
 
@@ -22,10 +26,10 @@ const StyledDiv = styled.div`
                 display: block;
                 width: 5.0rem;
                 margin: 0 auto;
+                
 
                 img {
                     display: block;
-                    width: 100%;
                 }
             }
 
@@ -36,7 +40,7 @@ const StyledDiv = styled.div`
                 margin: 1rem auto;
                 font-size: 1.8rem;
                 line-height: 1;
-                text-transform: uppercase;
+                text-transform: captialize;
             }
         }
     }
@@ -44,7 +48,10 @@ const StyledDiv = styled.div`
 
 export default function UserProfile(props){
   const { currentUser } = props
-  const { displayName } = currentUser
+  const { displayName, photoURL } = currentUser
+
+  const { setIsDarkMode } = useContext(ThemeModeContext)
+  const toggleMode = () => setIsDarkMode((s) => !s) 
 
   return (
     <StyledDiv>
@@ -55,9 +62,15 @@ export default function UserProfile(props){
           </div>
         </li>
         <li>
+          <img src={photoURL && photoURL} alt="Users profile image."/>
+        </li>
+        <li>
           <span className="displayName">
-            {displayName && displayName}
+            {displayName ? 'Hi, ' + displayName + '!' : 'Hi there!'}
           </span>
+        </li>
+        <li>
+        {/* <button onClick={toggleMode}>toggle</button> */}
         </li>
       </ul>
     </StyledDiv>

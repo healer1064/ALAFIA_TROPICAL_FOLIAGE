@@ -26,6 +26,7 @@ import Login from './pages/Login'
 import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
+import Search from './pages/Search'
 
 export default function App(){
   const dispatch = useDispatch()
@@ -46,6 +47,15 @@ export default function App(){
                   <Homepage />
                 </MainLayout>
               )} />
+
+              <Route exact path="/search" 
+                render={() => (
+                  <MainLayout>
+                    <Search />
+                  </MainLayout>
+                )}
+              />
+
               <Route exact path="/registration"
                 render={() => (
                 <MainLayout>

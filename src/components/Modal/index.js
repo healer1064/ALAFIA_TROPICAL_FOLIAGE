@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
         top: 0; left: 0;
         width: 100%;
         height: 100%;
-        background-color: rg
+        background-color: rgba(0, 0, 0, 0.6);
     }
 
     .modal {
@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
         -webkit-transform: translate(-50%, -50%);
         -moz-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-        background-color: white;
+        background-color: ${({ theme }) => theme.secondary};
         width: 95%;
         padding: 2rem;
         max-width: 60rem;

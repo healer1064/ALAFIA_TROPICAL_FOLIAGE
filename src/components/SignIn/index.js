@@ -11,8 +11,9 @@ import Button from './../forms/Button'
 // ACTIONS 
 import { emailSignInStart, googleSignInStart, } from '../../redux/user/user.actions'
 
-const StyledButton = styled.button`
-    display: block;
+const StyledButton = styled.div`
+    display: flex;
+    align-items: center;
     width: 100%;
     padding: 1rem 7rem;
     margin: 0 auto;
@@ -21,10 +22,10 @@ const StyledButton = styled.button`
     font-size: 2rem;
     line-height: 1;
     font-weight: 300;
-    text-transform: uppercase;
+    text-transform: captialize;
     outline: none;
     border: 0;
-    border-radius: 34px;
+    border-radius: 14px;
     cursor: pointer;
 `
 
@@ -66,7 +67,7 @@ const SignIn = (props) => {
 
     
         const configAuthWrapper = {
-            headLine: 'Login'
+            headLine: 'Log in'
         }
 
         return (
@@ -78,33 +79,36 @@ const SignIn = (props) => {
                             {serverSignUpErr && (<div style={{color: 'red'}}>{serverSignUpErr}</div>)}
                             
                             <FormInput
+                                label='Email'
                                 type='email' 
                                 name='email'
                                 value={email}
-                                placeholder='Email'
+                                // placeholder='Email'
                                 handleChange={e => setEmail(e.target.value)}
                             />
                             <FormInput
+                                label='Password'
                                 type='password' 
                                 name='password'
                                 value={password}
-                                placeholder='Password'
+                                // placeholder='Password'
                                 handleChange={e => setPassword(e.target.value)}
                             />
-                            <Button type="submit">Login</Button>
+                            
+                            <Button type="submit">Log in</Button>
 
                             <div className="socialSignIn">
                                 <div className="row">
-                                    <StyledButton onClick={handleGoogleSignIn}
-                                    >
-                                        Login with Google
+                                    <StyledButton onClick={handleGoogleSignIn}>
+                                        Log in with Google
                                     </StyledButton>
                                 </div>
                             </div>
 
                             <div className="links">
-                                <Link to='/recovery' style={{textDecoration: 'underline'}}>
-                                    Forgot password?
+                                <p>Don't have an account? <Link to='/registration' style={{color: '#35C0C9'}}>Sign Up</Link></p>
+                                <Link to='/recovery' style={{color: '#35C0C9', textSize: '.4rem'}}>
+                                    Forgot email or password?
                                 </Link>
                             </div>
 

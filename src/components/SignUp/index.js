@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom'
 
@@ -78,47 +79,55 @@ const SignUp = (props) => {
                                 <ul>
                                     {errors.map((err, index) => {
                                         return (
-                                            <li key={index}>{err}</li>
+                                            <li key={index} style={{listStyle: 'none', color: 'red'}} key={index}>{err}</li>
                                         )
                                     })}
                                 </ul>
                             )}
-                            { signUpServerError && (<div style={{color: 'red'}}>{ signUpServerError }</div>) }
+
+                            { signUpServerError && (<div style={{color: 'red', marginBottom: '1rem'}}>{ signUpServerError }</div>) }
+
                             <FormInput
+                                label='Full Name'
                                 type='text'
                                 name='displayName'
                                 value={displayName}
-                                placeholder="Full Name"
+                                // placeholder="Full Name"
                                 handleChange={e => setDisplayName(e.target.value)}
                             />
 
                             <FormInput
+                                label='Email'
                                 type='text'
                                 name='email'
                                 value={email}
-                                placeholder="Email"
+                                // placeholder="Email"
                                 handleChange={e => setEmail(e.target.value)}
                             />
 
                             <FormInput
+                                label='Password'
                                 type='password'
                                 name='password'
                                 value={password}
-                                placeholder="Password"
+                                // placeholder="Password"
                                 handleChange={e => setPassword(e.target.value)}
                             />
 
                             <FormInput
+                                label='Confirm Password'
                                 type='password'
                                 name='confirmPassword'
                                 value={confirmPassword}
-                                placeholder="Confirm Password"
+                                // placeholder="Confirm Password"
                                 handleChange={e => setConfirmPassword(e.target.value)}
                             />
 
                             <Button type="submit">
                                 Register
                             </Button>
+
+                            <p>Already have an account? <Link to='/login' style={{color: '#35C0C9'}}>Sign In</Link></p>
                         </form>
                     </div>
 
