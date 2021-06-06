@@ -1,10 +1,19 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects'
 import { userTypes } from './user.types'
 
-import {  auth, handleUserProfile, getCurrentUser, GoogleProvider } from '../../firebase/utils'
+import {  auth, 
+          handleUserProfile, 
+          getCurrentUser, 
+          GoogleProvider  } from '../../firebase/utils'
 
 // ACTIONS 
-import { signInSuccess, signOutUserSuccess, serverSignUpError, signUpUserError, registerServerError, resetPasswordSuccess, resetPasswordError } from './user.actions'
+import { signInSuccess, 
+         signOutUserSuccess, 
+         serverSignUpError, 
+         signUpUserError, 
+         registerServerError, 
+         resetPasswordSuccess, 
+         resetPasswordError } from './user.actions'
 
 // HELPERS
 import { handleResetPasswordAPI } from './user.helpers'

@@ -6,7 +6,11 @@ const StyledFooter = styled.footer`
         height: calc(100% - 6.5rem - 5.8rem);
         max-width: 1450px;
         padding: 20px 10px;
-        margin: 0 auto;
+        
+        height: 2.5rem;
+        position: absolute;
+        bottom: 0;
+        width: 100%; 
     }
 
 `

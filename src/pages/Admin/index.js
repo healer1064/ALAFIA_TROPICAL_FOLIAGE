@@ -27,9 +27,9 @@ const StyledDiv = styled.div`
         }
 
         ul {
+
             li {
                 display: inline-block;
-
             }
         }
 
@@ -76,7 +76,7 @@ export default function Admin(){
     const configModal = {
         hideModal,
         toggleModal
-    };
+    }
 
     useEffect(() => {
         dispatch(fetchPlantsStart())
@@ -91,14 +91,13 @@ export default function Admin(){
 
     const handleSubmit = e => {
         e.preventDefault()
-
         dispatch(addPlantStart({ 
             plantName, 
             plantThumbnail, 
             plantPrice
         }))
         resetForm()
-      }
+    }
 
 
     return (
@@ -112,6 +111,7 @@ export default function Admin(){
                         </Button>
                     </li>
                 </ul>
+
             </div>
 
             <Modal {...configModal}>
@@ -154,58 +154,6 @@ export default function Admin(){
 
             <div className="managePlants">
 
-                {/* <table border='0' cellPadding='0' cellSpacing='0'>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <h1>Manage Plants</h1>
-                            </th>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <table className="results" border='0' cellPadding='10' cellSpacing='0'>
-                                    <tbody>
-                                        {plantsData.map((plant, index) => {
-                                            const { 
-                                                plantName, 
-                                                plantThumbnail, 
-                                                plantPrice,
-                                                documentId
-                                            } = plant
-
-                                            return (
-                                                <tr key={index}>
-                                                    <td>
-                                                        <img 
-                                                            className="thumbnail"
-                                                            src={plantThumbnail}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        {plantName}
-                                                    </td>
-                                                    <td>
-                                                        ${plantPrice}
-                                                    </td>
-                                                    <td>
-                                                        <Button 
-                                                            onClick={() => dispatch(deletePlantStart(documentId)) }
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                        <DeleteButton handleClick={() => dispatch(deletePlantStart(documentId)) }/>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> */}
-
                 {plantsData && plantsData.map((plant, index) => {
                     const { 
                         plantName, 
@@ -214,7 +162,7 @@ export default function Admin(){
                         documentId
                     } = plant
                     return (
-                         <ListItem 
+                        <ListItem 
                             key={index} 
                             name={plantName} 
                             picture={plantThumbnail} 
@@ -223,7 +171,6 @@ export default function Admin(){
                         />
                     )
                 })}
-
             </div>
 
         </StyledDiv>    

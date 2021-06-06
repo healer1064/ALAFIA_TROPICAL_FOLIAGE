@@ -7,7 +7,7 @@ import "fontsource-open-sans"
 // COMPONENTS
 import AdminToolBar from './components/AdminToolBar'
 
-//HIGHER ORDER COMPONENTS
+// HIGHER ORDER COMPONENTS
 import WithAuth from './hoc/withAuth'
 import WithAdminAuth from './hoc/withAdminAuth'
 
@@ -42,11 +42,12 @@ export default function App(){
           <Switch>
 
               <Route exact path="/" 
-              render={() => (
-                <MainLayout>
-                  <Homepage />
-                </MainLayout>
-              )} />
+                render={() => (
+                  <MainLayout>
+                    <Homepage />
+                  </MainLayout>
+                )} 
+              />
 
               <Route exact path="/search" 
                 render={() => (
@@ -58,31 +59,36 @@ export default function App(){
 
               <Route exact path="/registration"
                 render={() => (
-                <MainLayout>
-                  <Registration />
-                </MainLayout>
-              )} />
+                  <MainLayout>
+                    <Registration />
+                  </MainLayout>
+                )} 
+              />
+
               <Route exact path="/login" 
                 render={() => (
                   <MainLayout>
                     <Login />
                   </MainLayout>
-              )} />
-              <Route exact path="/recovery" 
-              render={() => (
-                <MainLayout>
-                  <Recovery />
-                </MainLayout>
-              )}
+                )} 
               />
+
+              <Route exact path="/recovery" 
+                render={() => (
+                  <MainLayout>
+                    <Recovery />
+                  </MainLayout>
+                )}
+              />
+
               <Route exact path="/dashboard" 
-              render={() => (
-                <WithAuth>
-                  <DashboardLayout>
-                      <Dashboard />
-                  </DashboardLayout>
-                </WithAuth>
-              )}
+                render={() => (
+                  <WithAuth>
+                    <DashboardLayout>
+                        <Dashboard />
+                    </DashboardLayout>
+                  </WithAuth>
+                )}
               />
 
             <Route exact path="/admin" 
@@ -93,7 +99,7 @@ export default function App(){
                   </AdminLayout>
                 </WithAdminAuth>
               )}
-              />
+            />
 
           </Switch>
 

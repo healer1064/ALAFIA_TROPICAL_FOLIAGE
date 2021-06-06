@@ -28,6 +28,40 @@ const StyledHeader = styled.header`
             transform: translateY(-50%);
         }
 
+        nav {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+
+            ul, li li {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+            }
+
+            ul {
+                text-align: center;
+
+                li {
+                    list-style-type: none;
+                    margin: 0 10px;
+                    display: inline-block;
+
+                    a {
+                        color: ${({ theme }) => theme.primary};
+                        font-size: 1.8rem;
+                        line-height: 6.5rem;
+                        vertical-align: middle;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                    }
+                }
+
+            }
+        }
+
         .callToActions {
             position: absolute;
             right: 10px;
@@ -87,6 +121,20 @@ export default function Header(props){
                         {/* <img /> */}
                     </div>
                 </Link>
+
+
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/search">Search</Link>
+                        </li>
+                    </ul>
+                </nav>
+
+
                 <div className="callToActions">
                     {currentUser && (
                         <ul>

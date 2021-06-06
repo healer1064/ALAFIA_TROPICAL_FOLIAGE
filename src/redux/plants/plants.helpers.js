@@ -4,6 +4,7 @@ export const handleAddPlant = plant => {
     return new Promise((resolve, reject) => {
         firestore
         .collection('plants')
+        .orderBy('createdDate')
         .doc()
         .set(plant)
         .then(() => {
