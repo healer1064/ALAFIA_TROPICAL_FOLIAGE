@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchPlantsStart } from './../../redux/plants/plants.actions'
 
 import Product from './product'
+import LoadMore from '../LoadMore'
 
 const StyledDiv =  styled.div`
     display: block;
@@ -44,6 +45,14 @@ export default function Products({}){
         )
     }
 
+    const handleLoadMore = () => {
+
+    }
+
+    const configLoadMore = {
+        onLoadMoreEvent: handleLoadMore,
+    }
+
     return ( 
         <StyledDiv>
             <h1>Browse Products</h1>
@@ -63,6 +72,7 @@ export default function Products({}){
                     )
                 })}
             </div>
+            <LoadMore {...configLoadMore} />
         </StyledDiv>
     )
 }

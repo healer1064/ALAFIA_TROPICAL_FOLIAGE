@@ -96,5 +96,6 @@ export default function Product({ plantName, plantThumbnail, plantPrice, }){
                 </ul>
             </div>
         </StyledDiv>
+
     )
 }

@@ -4,22 +4,28 @@ export const handleAddPlant = plant => {
     return new Promise((resolve, reject) => {
         firestore
         .collection('plants')
-        .orderBy('createdDate')
         .doc()
         .set(plant)
         .then(() => {
             resolve()
         })
         .catch(error => {
-            reject(error.message)
+            reject(error)
         })
     })
 }
 
-export const handleFetchPlants = () => {
+export const handleFetchPlants = ({ startAfterDoc}) => {
     return new Promise(( resolve, reject) => {
-        firestore
-        .collection('plants')
+        const pageSize = 3
+
+        let ref = firestore.collection('plants').orderBy('createdDate').limit(pageSize)
+        if(startAfterDoc) ref = ref.startAfter(startAfterDoc)
+        // firestore
+        // .collection('plants')
+        // .orderBy('createdDate')
+        // .limit(pageSize)
+        ref
         .get()
         .then(snapshot => {
             const plantsArray = snapshot.docs.map(doc => {
@@ -31,7 +37,7 @@ export const handleFetchPlants = () => {
             resolve(plantsArray)
         })
         .catch(error => {
-            reject(error.message)
+            reject(error)
         })
     })
 }
@@ -46,7 +52,7 @@ export const handleDeletePlant = documentId => {
             resolve()
         })
         .catch(error => {
-            reject(error.message)
+            reject(error)
         })
     })  
 }
