@@ -27,6 +27,7 @@ import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import Search from './pages/Search'
+import ProductDetails from './pages/ProductDetails'
 
 export default function App(){
   const dispatch = useDispatch()
@@ -55,6 +56,14 @@ export default function App(){
                     <Search />
                   </MainLayout>
                 )}
+              />
+
+              <Route exact path="/product/:productID" 
+                render={() => (
+                  <MainLayout>
+                    <ProductDetails />
+                  </MainLayout>
+                )} 
               />
 
               <Route exact path="/registration"

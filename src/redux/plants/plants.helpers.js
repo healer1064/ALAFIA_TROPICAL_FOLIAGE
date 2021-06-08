@@ -15,17 +15,10 @@ export const handleAddPlant = plant => {
     })
 }
 
-export const handleFetchPlants = ({ startAfterDoc}) => {
+export const handleFetchPlants = () => {
     return new Promise(( resolve, reject) => {
-        const pageSize = 3
-
-        let ref = firestore.collection('plants').orderBy('createdDate').limit(pageSize)
-        if(startAfterDoc) ref = ref.startAfter(startAfterDoc)
-        // firestore
-        // .collection('plants')
-        // .orderBy('createdDate')
-        // .limit(pageSize)
-        ref
+        firestore
+        .collection('plants')
         .get()
         .then(snapshot => {
             const plantsArray = snapshot.docs.map(doc => {
@@ -37,7 +30,7 @@ export const handleFetchPlants = ({ startAfterDoc}) => {
             resolve(plantsArray)
         })
         .catch(error => {
-            reject(error)
+            reject(error.message)
         })
     })
 }
