@@ -3,10 +3,10 @@ import { takeLatest, put, all, call } from 'redux-saga/effects'
 import { plantsTypes } from './plants.types'
 
 // ACTION CREATORS
-import { setPlants, fetchPlantsStart } from './plants.actions'
+import { setPlants, fetchPlantsStart, setAPlant } from './plants.actions'
 
 // HELPERS 
-import { handleAddPlant, handleFetchPlants, handleDeletePlant } from './plants.helpers'
+import { handleAddPlant, handleFetchPlants, handleDeletePlant, handleFetchAPlant } from './plants.helpers'
 
 
     export function* addPlant({ payload: { 
@@ -37,8 +37,6 @@ import { handleAddPlant, handleFetchPlants, handleDeletePlant } from './plants.h
 export function* onAddPlantStart(){
     yield takeLatest(plantsTypes.ADD_NEW_PLANT_START, addPlant)
 }
-
-
 
 
 
@@ -77,6 +75,21 @@ export function* onDeletePlantStart(){
 
 
 
+    export function* fetchAPlant({ payload }){
+        try {
+            const plant = yield handleFetchAPlant(payload)
+            yield put(
+                setAPlant(plant)
+            )
+
+        } catch (error) {
+            // console.error(error)
+        }
+    }
+export function* onFetchAPlanntStart(){
+    yield takeLatest(plantsTypes.FETCH_A_PLANT_START, fetchAPlant)
+}
+
 
 
 
@@ -84,6 +97,7 @@ export default function* plantsSagas(){
     yield all([
         call(onAddPlantStart),
         call(onFetchPlantsStart),
-        call(onDeletePlantStart)
+        call(onDeletePlantStart),
+        call(onFetchAPlanntStart),
     ])
 }

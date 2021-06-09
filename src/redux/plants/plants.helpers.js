@@ -49,3 +49,22 @@ export const handleDeletePlant = documentId => {
         })
     })  
 }
+
+export const handleFetchAPlant = plantID => {
+    return new Promise(( resolve, reject) => {
+        firestore
+        .collection('plants')
+        .doc(plantID)
+        .get()
+        .then(snapshot => {
+            if(snapshot.exists){
+                resolve(
+                    snapshot.data()
+                )
+            }
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+}

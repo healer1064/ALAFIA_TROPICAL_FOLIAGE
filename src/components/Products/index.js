@@ -49,9 +49,9 @@ export default function Products({}){
 
     }
 
-    const configLoadMore = {
-        onLoadMoreEvent: handleLoadMore,
-    }
+    // const configLoadMore = {
+    //     onLoadMoreEvent: handleLoadMore,
+    // }
 
     return ( 
         <StyledDiv>
@@ -59,20 +59,21 @@ export default function Products({}){
             <div className="product_results"> 
                 {plantsData && plantsData.map((plant, index) => {
                     const { 
+                        documentId,
                         plantName, 
                         plantThumbnail, 
                         plantPrice,
                     } = plant
                     if(!plantThumbnail || !plantName || typeof plantPrice === 'undefined') return null
 
-                    const configProduct = { plantName, plantThumbnail, plantPrice}
+                    const configProduct = { ...plant }
 
                     return (
-                        <Product {...configProduct} />
+                        <Product key={index} {...configProduct} />
                     )
                 })}
             </div>
-            <LoadMore {...configLoadMore} />
+            {/* <LoadMore {...configLoadMore} /> */}
         </StyledDiv>
     )
 }

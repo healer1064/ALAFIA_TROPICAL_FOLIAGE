@@ -17,3 +17,13 @@ export const deletePlantStart = id => ({
     type: plantsTypes.DELETE_PLANT_START,
     payload: id
 })
+
+export const fetchAPlantStart = plantID => ({
+    type: plantsTypes.FETCH_A_PLANT_START,
+    payload: plantID
+})
+
+export const setAPlant = plant => ({
+    type: plantsTypes.SET_A_PLANT,
+    payload: plant
+})

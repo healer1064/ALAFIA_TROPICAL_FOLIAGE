@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import  Button from '../../forms/Button'
 
@@ -37,6 +38,10 @@ const StyledDiv = styled.div`
                 margin: 0 0 .5rem;
                 text-align: left;
 
+                a {
+                    color: black;
+                }
+
                 .name {
                     font-size: 2.2rem;
                     line-height: 1.2;
@@ -61,8 +66,8 @@ const StyledDiv = styled.div`
 
 `
 
-export default function Product({ plantName, plantThumbnail, plantPrice, }){
-    if(!plantThumbnail || !plantName || typeof plantPrice === 'undefined') return null
+export default function Product({  documentId, plantName, plantThumbnail, plantPrice, }){
+    if( !documentId || !plantThumbnail || !plantName || typeof plantPrice === 'undefined') return null
 
     const configAddToCartButton = {
         type: 'button'
@@ -71,15 +76,19 @@ export default function Product({ plantName, plantThumbnail, plantPrice, }){
     return(
         <StyledDiv>
             <div className="thumb">
-                <img src={plantThumbnail} alt={plantName}/>
+                <Link to={`/plant/${documentId}`}>
+                    <img src={plantThumbnail} alt={plantName}/>
+                </Link>
             </div>
 
             <div className="details">
                 <ul>
                     <li>
-                        <span className="name">
-                            {plantName}
-                        </span>
+                        <Link to={`/plant/${documentId}`}>
+                            <span className="name">
+                                {plantName}
+                            </span>
+                        </Link>
                     </li>
                     <li>
                         $<span className="price">

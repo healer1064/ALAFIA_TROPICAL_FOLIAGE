@@ -27,7 +27,7 @@ import Recovery from './pages/Recovery'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import Search from './pages/Search'
-import ProductDetails from './pages/ProductDetails'
+import PlantDetails from './pages/PlantDetails'
 
 export default function App(){
   const dispatch = useDispatch()
@@ -58,10 +58,10 @@ export default function App(){
                 )}
               />
 
-              <Route exact path="/product/:productID" 
+              <Route exact path="/plant/:plantID" 
                 render={() => (
                   <MainLayout>
-                    <ProductDetails />
+                    <PlantDetails />
                   </MainLayout>
                 )} 
               />

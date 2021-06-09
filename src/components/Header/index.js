@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // ACTIONS 
 import { signOutUserStart } from '../../redux/user/user.actions'
 
+
 const StyledHeader = styled.header`
     transition: .2s ease-in-out;
     height: 6.5rem;
@@ -162,6 +163,8 @@ export default function Header(props){
                 </div>
             </div>
         </StyledHeader>
+
+       
     )
 }
 
