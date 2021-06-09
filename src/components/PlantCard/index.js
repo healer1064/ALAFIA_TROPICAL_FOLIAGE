@@ -56,7 +56,7 @@ export default function PlantCard({}){
     const { plantID } = useParams()
     const { aPlant } = useSelector(mapState)
 
-    const { plantName, plantThumbnail, plantPrice } = aPlant
+    const { plantName, plantThumbnail, plantPrice, plantDesc } = aPlant
 
     useEffect(() => {
         dispatch(fetchAPlantStart(plantID))
@@ -88,6 +88,10 @@ export default function PlantCard({}){
                                 Add to Cart
                             </Button>
                         </div>
+                    </li>
+                    <li>
+                        <span 
+                        dangerouslySetInnerHTML={{__html: plantDesc}} />
                     </li>
                 </ul>
             </div>

@@ -9,18 +9,12 @@ import { setPlants, fetchPlantsStart, setAPlant } from './plants.actions'
 import { handleAddPlant, handleFetchPlants, handleDeletePlant, handleFetchAPlant } from './plants.helpers'
 
 
-    export function* addPlant({ payload: { 
-        plantName, 
-        plantThumbnail, 
-        plantPrice
-     } }){
+    export function* addPlant({ payload }){
 
         try {
             const timestamp = new Date()
             yield handleAddPlant({
-                plantName, 
-                plantThumbnail, 
-                plantPrice, 
+                ...payload,
                 AdminUserUID: auth.currentUser.uid,
                 AdminUserName: auth.currentUser.displayName,
                 createdDate: timestamp

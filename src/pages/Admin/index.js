@@ -11,6 +11,8 @@ import FormSelect from './../../components/forms/FormSelect'
 import Button from './../../components/forms/Button'
 import ListItem from './../../components/ListItem'
 
+import CKEditor from 'ckeditor4-react'
+
 const StyledDiv = styled.div`
     padding: 0 10px;
 
@@ -70,6 +72,7 @@ export default function Admin(){
     const [plantName, setPlantName] = useState('')
     const [plantThumbnail, setPlantThumbnail] = useState('')
     const [plantPrice, setPlantPrice] = useState(0)
+    const [plantDesc, setPlantDesc] = useState('')
 
     const toggleModal = () => setHideModal(!hideModal);
 
@@ -87,6 +90,7 @@ export default function Admin(){
         setPlantName('') 
         setPlantThumbnail('') 
         setPlantPrice(0)
+        setPlantDesc('')
     }
 
     const handleSubmit = e => {
@@ -94,7 +98,8 @@ export default function Admin(){
         dispatch(addPlantStart({ 
             plantName, 
             plantThumbnail, 
-            plantPrice
+            plantPrice,
+            plantDesc
         }))
         resetForm()
     }
@@ -143,6 +148,12 @@ export default function Admin(){
                             value={plantPrice}
                             handleChange={e => setPlantPrice(e.target.value)}
                         />
+
+                        <CKEditor 
+                            onChange={evt => setPlantDesc(evt.editor.getData())}
+                        />
+
+                        <br />
 
                         <Button type="submit">
                             Add product
