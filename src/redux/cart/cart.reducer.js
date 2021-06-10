@@ -1,4 +1,5 @@
 import { cartTypes } from './cart.types'
+import { handleAddToCart } from './cart.utils'
 
 
 const INITIAL_STATE = {
@@ -10,12 +11,10 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         case cartTypes.ADD_TO_CART:
             return {
                 ...state,
-                cartItems: [
-                    ...state.cartItems,
-                    {
-                        ...action.payload
-                    }
-                ]
+                cartItems: handleAddToCart({
+                    prevCartItem: state.cartItems,
+                    nextCartItem: action.payload
+                })
             }
         default:
             return state
