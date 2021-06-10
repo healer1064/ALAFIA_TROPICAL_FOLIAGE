@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import  Button from '../../forms/Button'
+import { useDispatch } from 'react-redux'
+
+import { addPlantToCart } from '../../../redux/cart/cart.actions'
 
 const StyledDiv = styled.div`
     width: 33.333333333333%;
@@ -66,11 +69,18 @@ const StyledDiv = styled.div`
 
 `
 
-export default function Product({  documentId, plantName, plantThumbnail, plantPrice, }){
+export default function Product(plant){
+    const dispatch = useDispatch()
+    const { documentId, plantThumbnail, plantName, plantPrice } = plant
     if( !documentId || !plantThumbnail || !plantName || typeof plantPrice === 'undefined') return null
 
     const configAddToCartButton = {
         type: 'button'
+    }
+ 
+    const handleAddToCart = (plant) => {
+        if(!plant) return 
+        dispatch(addPlantToCart(plant))
     }
 
     return(
@@ -97,7 +107,7 @@ export default function Product({  documentId, plantName, plantThumbnail, plantP
                     </li>
                     <li>
                         <div className="add_to_cart">
-                            <Button {...configAddToCartButton}>
+                            <Button {...configAddToCartButton} onClick={() => handleAddToCart(plant)}>
                                 Add to cart
                             </Button>
                         </div>
