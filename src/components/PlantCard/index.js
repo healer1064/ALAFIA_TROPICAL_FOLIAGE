@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAPlantStart, setAPlant } from './../../redux/plants/plants.actions'
+import { addPlantToCart } from './../../redux/cart/cart.actions'
 
 import Button from '../forms/Button'
 
@@ -66,6 +67,11 @@ export default function PlantCard({}){
         }
     },[])
 
+    const handleAddToCart = (plant) => {
+        if(!plant) return null
+        dispatch(addPlantToCart(plant))
+    }
+
     const configAddToCartBtn = {
         type: 'button'
     }
@@ -84,7 +90,7 @@ export default function PlantCard({}){
                     </li>
                     <li>
                         <div className="add_to_cart">
-                            <Button {...configAddToCartBtn}>
+                            <Button {...configAddToCartBtn} onClick={() => handleAddToCart(aPlant)}>
                                 Add to Cart
                             </Button>
                         </div>
