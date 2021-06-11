@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from 'react-redux'
 // ACTIONS 
 import { signOutUserStart } from '../../redux/user/user.actions'
 
+// SELECTORS 
+import { selectCartItemsCount } from './../../redux/cart/cart.selectors'
+
 
 const StyledHeader = styled.header`
     transition: .2s ease-in-out;
@@ -102,12 +105,13 @@ const StyledHeader = styled.header`
 
     }
 `
-const mapState = ({user}) => ({
-    currentUser: user.currentUser
+const mapState = (state) => ({
+    currentUser: state.user.currentUser,
+    totalNumCartItems: selectCartItemsCount(state)
 })
 export default function Header(props){
     const dispatch = useDispatch()
-    const { currentUser } = useSelector(mapState)
+    const { currentUser, totalNumCartItems } = useSelector(mapState)
 
     const signOut = () => {
         dispatch(signOutUserStart())
@@ -137,7 +141,37 @@ export default function Header(props){
 
 
                 <div className="callToActions">
-                    {currentUser && (
+
+                    <ul>
+                        <li>
+                            <Link>
+                                Your Cart ({totalNumCartItems})
+                            </Link>
+                        </li>
+                        {currentUser && [
+                            
+                                <li>
+                                    <Link to="/dashboard">My Account</Link>
+                                </li>,
+                                <li>
+                                    <span onClick={() => signOut()}>
+                                        LOGOUT
+                                    </span>
+                                </li>
+                            
+                        ]}
+
+                        {!currentUser && [
+                            <li>
+                                <Link to="/registration">Register</Link>
+                            </li>,
+                            <li>
+                                <Link to="/login">Login</Link>
+                            </li>
+                        ]}
+                    </ul>
+
+                    {/* {currentUser && (
                         <ul>
                             <li>
                                 <Link to="/dashboard">My Account</Link>
@@ -148,8 +182,8 @@ export default function Header(props){
                                 </span>
                             </li>
                         </ul>
-                    )}
-                    {!currentUser && (
+                    )} */}
+                    {/* {!currentUser && (
                         <ul>
                             
                             <li>
@@ -159,7 +193,7 @@ export default function Header(props){
                                 <Link to="/login">Login</Link>
                             </li>
                         </ul>
-                     )}
+                     )} */}
                 </div>
             </div>
         </StyledHeader>
