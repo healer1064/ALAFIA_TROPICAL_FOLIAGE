@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { ThemeModeProvider } from './styles/theme'
 import { Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { ChakraProvider } from "@chakra-ui/react"
 import "fontsource-open-sans"
 
 // COMPONENTS
@@ -37,6 +38,7 @@ export default function App(){
   },[])
 
     return (
+      <ChakraProvider>
       <ThemeModeProvider>
         <div className="App">
           <AdminToolBar />
@@ -114,6 +116,7 @@ export default function App(){
 
         </div>
       </ThemeModeProvider>
+      </ChakraProvider>
     )
   
 }
