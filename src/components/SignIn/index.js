@@ -67,7 +67,7 @@ const SignIn = (props) => {
 
     
         const configAuthWrapper = {
-            headLine: 'Log in'
+            headLine: 'Sign in to your account'
         }
 
         return (

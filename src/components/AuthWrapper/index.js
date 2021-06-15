@@ -1,12 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import {
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    Checkbox,
+    Stack,
+    Link,
+    Button,
+    Heading,
+    Text,
+    useColorModeValue,
+  } from '@chakra-ui/react'
+
 const StyledAuth = styled.div`
-        display: block;
-        width: 100%;
-        max-width: 40.0rem;
-        box-shadow: 0rem 0.225rem 0.475rem 0.164rem rgba(0, 0, 0, 0.12);
-        margin: 4rem auto 6rem;
+        
 
         .wrap {
             padding: 20px;
@@ -46,10 +56,20 @@ export default function AuthWrapper({ headLine, children}){
     return (
         <StyledAuth>
             <div className="wrap">
-                { headLine && <h2>{headLine}</h2>}
+                {/* { headLine && <h2>{headLine}</h2>}
                 <div className="children">
                     {children && children}
-                </div>
+                </div> */}
+                {headLine && <Heading fontSize={'4xl'}>{headLine}</Heading>}
+                <Box
+                    maxWidth={'40.0rem'}
+                    margin={'4rem auto 6rem'}
+                    rounded={'lg'}
+                    bg={useColorModeValue('white', 'gray.700')}
+                    boxShadow={'lg'}
+                    p={8}>
+                    {children && children}
+                </Box>
             </div>
         </StyledAuth>
     )
