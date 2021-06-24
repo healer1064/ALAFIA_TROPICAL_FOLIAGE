@@ -20,13 +20,16 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
+
+
+
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons';
+} from '@chakra-ui/icons'
 
 
 // ACTIONS 
@@ -212,7 +215,7 @@ export default function Header(props){
                   fontWeight={400}
                   variant={'link'}
                   >
-                    <NavLink to='/'>Cart({totalNumCartItems})</NavLink>
+                    <NavLink to='/cart'>Cart({totalNumCartItems})</NavLink>
                 </Button>
               </Stack>
 

@@ -29,6 +29,7 @@ import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import Search from './pages/Search'
 import PlantDetails from './pages/PlantDetails'
+import Cart from './pages/Cart'
 
 export default function App(){
   const dispatch = useDispatch()
@@ -39,83 +40,91 @@ export default function App(){
 
     return (
       <ChakraProvider>
-      <ThemeModeProvider>
-        <div className="App">
-          <AdminToolBar />
-          <Switch>
+        <ThemeModeProvider>
+          <div className="App">
+            <AdminToolBar />
+            <Switch>
 
-              <Route exact path="/" 
-                render={() => (
-                  <MainLayout>
-                    <Homepage />
-                  </MainLayout>
-                )} 
-              />
+                <Route exact path="/" 
+                  render={() => (
+                    <MainLayout>
+                      <Homepage />
+                    </MainLayout>
+                  )} 
+                />
 
-              <Route exact path="/search" 
+                <Route exact path="/search" 
+                  render={() => (
+                    <MainLayout>
+                      <Search />
+                    </MainLayout>
+                  )}
+                />
+
+                <Route exact path="/plant/:plantID" 
+                  render={() => (
+                    <MainLayout>
+                      <PlantDetails />
+                    </MainLayout>
+                  )} 
+                />
+
+                <Route path="/cart" 
+                  render={() => (
+                    <MainLayout>
+                      <Cart />
+                    </MainLayout>
+                  )}  
+                />
+
+                <Route exact path="/registration"
+                  render={() => (
+                    <MainLayout>
+                      <Registration />
+                    </MainLayout>
+                  )} 
+                />
+
+                <Route exact path="/login" 
+                  render={() => (
+                    <MainLayout>
+                      <Login />
+                    </MainLayout>
+                  )} 
+                />
+
+                <Route exact path="/recovery" 
+                  render={() => (
+                    <MainLayout>
+                      <Recovery />
+                    </MainLayout>
+                  )}
+                />
+
+                <Route exact path="/dashboard" 
+                  render={() => (
+                    <WithAuth>
+                      <DashboardLayout>
+                          <Dashboard />
+                      </DashboardLayout>
+                    </WithAuth>
+                  )}
+                />
+
+              <Route exact path="/admin" 
                 render={() => (
-                  <MainLayout>
-                    <Search />
-                  </MainLayout>
+                  <WithAdminAuth>
+                    <AdminLayout>
+                      <Admin />
+                    </AdminLayout>
+                  </WithAdminAuth>
                 )}
               />
 
-              <Route exact path="/plant/:plantID" 
-                render={() => (
-                  <MainLayout>
-                    <PlantDetails />
-                  </MainLayout>
-                )} 
-              />
+            </Switch>
 
-              <Route exact path="/registration"
-                render={() => (
-                  <MainLayout>
-                    <Registration />
-                  </MainLayout>
-                )} 
-              />
-
-              <Route exact path="/login" 
-                render={() => (
-                  <MainLayout>
-                    <Login />
-                  </MainLayout>
-                )} 
-              />
-
-              <Route exact path="/recovery" 
-                render={() => (
-                  <MainLayout>
-                    <Recovery />
-                  </MainLayout>
-                )}
-              />
-
-              <Route exact path="/dashboard" 
-                render={() => (
-                  <WithAuth>
-                    <DashboardLayout>
-                        <Dashboard />
-                    </DashboardLayout>
-                  </WithAuth>
-                )}
-              />
-
-            <Route exact path="/admin" 
-              render={() => (
-                <WithAdminAuth>
-                  <AdminLayout>
-                    <Admin />
-                  </AdminLayout>
-                </WithAdminAuth>
-              )}
-            />
-
-          </Switch>
-
-        </div>
-      </ThemeModeProvider>
+          </div>
+        </ThemeModeProvider>
       </ChakraProvider>
     )
   
