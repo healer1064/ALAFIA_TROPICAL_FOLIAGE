@@ -166,7 +166,7 @@ export default function Header(props){
     }
 
     return(
-          <Box>
+          <Box marginBottom={'2rem'}>
             <Flex
               bg={useColorModeValue('white', 'gray.800')}
               color={useColorModeValue('gray.600', 'white')}

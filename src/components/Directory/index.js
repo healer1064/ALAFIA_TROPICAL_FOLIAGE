@@ -2,10 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import BackgroundVideo from '../BackgroundVideo'
-
-import ShopPlants from '../../assets/pexels-daria-shevtsova-1578244.jpg'
-// import ShopColors from '../../assets/pexels-suzy-hazelwood-3834461.jpg'
-
 import plantShade from '../../assets/video.mp4'
 
 
