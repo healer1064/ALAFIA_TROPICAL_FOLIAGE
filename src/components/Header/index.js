@@ -298,7 +298,7 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? '#'}
+                // href={navItem.href ?? '#'}
                 fontSize={'18px'}
                 fontWeight={500}
                 color={'gray.600'}
@@ -306,7 +306,7 @@ const DesktopNav = () => {
                   textDecoration: 'none',
                   // color: useColorModeValue('gray.800', 'white'),
                 }}>
-                {navItem.label}
+                <NavLink to='/search'>{navItem.label}</NavLink>
               </Link>
             </PopoverTrigger>
 
@@ -364,8 +364,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
         </Flex>
       </Stack>
     </Link>
-  );
-};
+  )
+}
 
 const MobileNav = () => {
   return (

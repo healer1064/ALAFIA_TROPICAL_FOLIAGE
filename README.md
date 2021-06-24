@@ -42,4 +42,14 @@ You'll need your own firebase configurations and API keys to utilize any Firebas
    npm run serve
    ```
 
+### TODO List 👀👨‍💻
 
+- [ ] Add GraphQL
+- [x] Add CMS for blog page
+- [x] Create redux custom selector for cart reducer quantity
+- [x] Create redux custom selector for total cart price
+- [ ] Host project to firebase
+- [ ] Implement SSR
+- [ ] Add a Live Chat feature
+- [ ] Persist cart to local storage
+- [x] Create dark mode using styled-components 
