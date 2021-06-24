@@ -42,7 +42,7 @@ You'll need your own firebase configurations and API keys to utilize any Firebas
    npm run serve
    ```
 
-### TODO List 👀👨‍💻
+## 👀👨‍💻 TODO List 
 
 - [ ] Add GraphQL
 - [ ] Add CMS for blog page
