@@ -45,7 +45,7 @@ You'll need your own firebase configurations and API keys to utilize any Firebas
 ### TODO List 👀👨‍💻
 
 - [ ] Add GraphQL
-- [x] Add CMS for blog page
+- [ ] Add CMS for blog page
 - [x] Create redux custom selector for cart reducer quantity
 - [x] Create redux custom selector for total cart price
 - [ ] Host project to firebase
